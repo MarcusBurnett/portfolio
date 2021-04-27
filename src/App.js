@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import AppProviders from './context';
+import Wrapper from './components/Wrapper';
+import Toast from './components/Toast';
+import './firebase';
+import Left from './pages/Left';
+import Right from './pages/Right';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProviders>
+      <Wrapper>
+        <Left />
+        <Right />
+      </Wrapper>
+      <Toast />
+    </AppProviders>
   );
 }
 

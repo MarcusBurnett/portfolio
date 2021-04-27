@@ -3,9 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'normalize.css';
+import 'main.css/dist/_base.css';
+import GlobalStyles from './styles/GlobalStyles';
+import Typography from './styles/Typography';
 
 ReactDOM.render(
   <React.StrictMode>
+    <GlobalStyles />
+    <Typography />
     <App />
   </React.StrictMode>,
   document.getElementById('root')
