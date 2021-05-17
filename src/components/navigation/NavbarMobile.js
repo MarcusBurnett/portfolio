@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { darkBlue, blue } from '../styles/colors';
-import { useTheme } from '../context/theme';
-import { small } from '../styles/breakpoints';
-import { useScrollPosition, useTabs } from '../hooks';
+import { darkBlue, blue } from '../../styles/colors';
+import { useTheme } from '../../context/theme';
+import { small } from '../../styles/breakpoints';
+import { useScrollPosition, useTabs } from '../../hooks';
 import NavbarMenuIcon from './NavbarMenuIcon';
 
 const StyledNavbarMobile = styled.div`

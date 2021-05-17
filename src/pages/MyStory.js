@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import MyStoryDetails from '../components/MyStoryDetails';
-import MyStoryTimeline from '../components/MyStoryTimeline';
+import Details from '../components/MyStory/Details';
+import Timeline from '../components/MyStory/Timeline';
 import Spacer from '../components/Spacer';
 import { small } from '../styles/breakpoints';
 
@@ -22,9 +22,9 @@ const Container = styled.div`
 
 const MyStory = () => (
   <Container>
-    <MyStoryDetails />
+    <Details />
     <Spacer size="xxxl" />
-    <MyStoryTimeline />
+    <Timeline />
   </Container>
 );
 

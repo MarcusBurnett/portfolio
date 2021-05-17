@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components/macro';
 import { Redirect, useLocation } from 'react-router-dom';
-import AnimatedRouteContainer from '../components/AnimatedRouteContainer';
+import AnimatedRouteContainer from '../components/navigation/AnimatedRouteContainer';
 import { fadeIn } from '../keyframes';
-import AnimatedRoute from '../components/AnimatedRoute';
+import AnimatedRoute from '../components/navigation/AnimatedRoute';
 import { small } from '../styles/breakpoints';
 import routes from '../data/routes';
 
@@ -23,7 +23,11 @@ const StyledContent = styled.div`
 const Pages = () => {
   const { pathname } = useLocation();
 
-  if (pathname === '/') return <Redirect to="/my-story" />;
+  if (
+    pathname === '/' ||
+    !routes.find((route) => pathname.includes(route.path))
+  )
+    return <Redirect to="/my-story" />;
 
   return (
     <StyledContent>

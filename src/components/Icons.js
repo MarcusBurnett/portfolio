@@ -8,12 +8,12 @@ import {
 } from '../assets/images';
 import { small } from '../styles/breakpoints';
 
-const StyledSocialMedia = styled.div`
+const StyledIcons = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
-const SocialMediaItem = styled.img`
+const IconsItem = styled.img`
   width: 100%;
   height: 100%;
 `;
@@ -39,26 +39,26 @@ const Link = styled.a`
   }
 `;
 
-const socialMediaItems = [
+const icons = [
   { url: 'mailto:m.burnett8@outlook.com', icon: emailIcon },
   { url: 'tel: +447393862452', icon: phoneIcon },
   { url: 'https://www.linkedin.com/in/marcus-burnett/', icon: linkedInIcon },
   { url: 'https://www.github.com/marcusburnett', icon: githubIcon },
 ];
 
-const SocialMedia = () => (
-  <StyledSocialMedia>
-    {socialMediaItems.map((social) => (
+const Icons = () => (
+  <StyledIcons>
+    {icons.map((social) => (
       <Link
         key={social.url}
         target="_blank"
         rel="noopener noreferrer"
         href={social.url}
       >
-        <SocialMediaItem src={social.icon} />
+        <IconsItem src={social.icon} />
       </Link>
     ))}
-  </StyledSocialMedia>
+  </StyledIcons>
 );
 
-export default SocialMedia;
+export default Icons;

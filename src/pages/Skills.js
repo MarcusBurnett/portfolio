@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components/macro';
 import { Redirect, useLocation } from 'react-router-dom';
-import SkillsList from '../components/SkillsList';
-import SkillDetails from '../components/SkillDetails';
+import List from '../components/Skills/List';
+import Details from '../components/Skills/Details';
 import skills from '../data/skills';
-import AnimatedRoute from '../components/AnimatedRoute';
+import AnimatedRoute from '../components/navigation/AnimatedRoute';
 import { xsmall } from '../styles/breakpoints';
 
 const Container = styled.div`
@@ -33,7 +33,7 @@ const ListContainer = styled.div`
   }
 `;
 
-const SkillDetailsContainer = styled.div`
+const DetailsContainer = styled.div`
   flex: 1;
   height: 100%;
   width: 70%;
@@ -54,15 +54,15 @@ const Skills = () => {
   return (
     <Container>
       <ListContainer>
-        <SkillsList />
+        <List />
       </ListContainer>
-      <SkillDetailsContainer>
+      <DetailsContainer>
         {skills.map((skill) => (
           <Fragment key={skill.title}>
-            <AnimatedRoute path={skill.path} Component={SkillDetails} />
+            <AnimatedRoute path={skill.path} Component={Details} />
           </Fragment>
         ))}
-      </SkillDetailsContainer>
+      </DetailsContainer>
     </Container>
   );
 };

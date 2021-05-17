@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { darkBlue, blue } from '../styles/colors';
 import Spacer from './Spacer';
-import SocialMedia from './SocialMedia';
-import Navbar from './Navbar';
+import Icons from './Icons';
+import Navbar from './navigation/Navbar';
 import Background from './Background';
 import { small, medium, xsmall } from '../styles/breakpoints';
 import { useThemeSelect } from '../hooks';
@@ -105,7 +105,7 @@ const Left = () => {
           <SubTitle>UX/UI Designer</SubTitle>
           <Spacer size="l" />
         </Content>
-        <SocialMedia />
+        <Icons />
       </Container>
     </StyledHeader>
   );

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { blue, darkBlue, red } from '../styles/colors';
-import Spinner from './Spinner';
-import { medium } from '../styles/fonts';
-import { small as smallBreakpoint } from '../styles/breakpoints';
-import useThemeSelect from '../hooks/useThemeSelect';
+import { blue, darkBlue, red } from '../../styles/colors';
+import Spinner from '../Spinner';
+import { medium } from '../../styles/fonts';
+import { small as smallBreakpoint } from '../../styles/breakpoints';
+import useThemeSelect from '../../hooks/useThemeSelect';
 
 const StyledButton = styled.button`
   font-weight: ${medium};

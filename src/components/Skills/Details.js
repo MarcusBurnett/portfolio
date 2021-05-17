@@ -8,14 +8,14 @@ import {
   VerticalImageFadeLight,
   VerticalImageFadeDark,
   HorizontalImageFadeDark,
-} from './BackgroundImageFade';
-import { useTheme } from '../context/theme';
-import skills from '../data/skills';
-import { fadeInAndSlideLeft, fadeInAndSlideUp } from '../keyframes';
-import { darkBlue } from '../styles/colors';
-import Spacer from './Spacer';
-import CardList from './CardList';
-import { xsmall } from '../styles/breakpoints';
+} from '../BackgroundImageFade';
+import { useTheme } from '../../context/theme';
+import skills from '../../data/skills';
+import { fadeInAndSlideLeft, fadeInAndSlideUp } from '../../keyframes';
+import { darkBlue } from '../../styles/colors';
+import Spacer from '../Spacer';
+import CardList from '../CardList';
+import { xsmall } from '../../styles/breakpoints';
 
 const Container = styled.div`
   width: 100%;
@@ -100,7 +100,7 @@ const StyledCardList = styled(CardList)`
   }
 `;
 
-const SkillDetails = () => {
+const Details = () => {
   const location = useLocation();
   const [skill, setSkill] = useState({});
   const { theme, themeChanging } = useTheme();
@@ -154,4 +154,4 @@ const SkillDetails = () => {
   );
 };
 
-export default SkillDetails;
+export default Details;

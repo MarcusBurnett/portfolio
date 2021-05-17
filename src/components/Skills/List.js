@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components/macro';
 import { Link, useLocation } from 'react-router-dom';
-import Spacer from './Spacer';
-import { developmentSkills, designSkills } from '../data/skills';
-import { red, greyDark, greyMedium, darkBlue } from '../styles/colors';
-import { useTheme } from '../context/theme';
-import { xsmall } from '../styles/breakpoints';
-import { fadeIn } from '../keyframes';
+import Spacer from '../Spacer';
+import { developmentSkills, designSkills } from '../../data/skills';
+import { red, greyDark, greyMedium, darkBlue } from '../../styles/colors';
+import { useTheme } from '../../context/theme';
+import { xsmall } from '../../styles/breakpoints';
+import { fadeIn } from '../../keyframes';
 
-const StyledSkillsList = styled.div`
+const StyledList = styled.div`
   padding: 5vh 0 5vh 3vw;
   opacity: 0;
   animation: 1s ${fadeIn} ease 0.5s forwards;
@@ -19,7 +19,7 @@ const StyledSkillsList = styled.div`
   }
 `;
 
-const List = styled.ul`
+const ListContainer = styled.ul`
   position: relative;
 
   @media screen and (max-width: ${xsmall}) {
@@ -99,7 +99,7 @@ const CategoryTitle = styled.h3`
   color: ${({ theme }) => (theme === 'dark' ? greyMedium : greyDark)};
 `;
 
-const SkillsList = () => {
+const List = () => {
   const { pathname } = useLocation();
   const { theme } = useTheme();
 
@@ -124,20 +124,20 @@ const SkillsList = () => {
     });
 
   return (
-    <StyledSkillsList>
+    <StyledList>
       <div>
         <CategoryTitle>DEVELOPMENT</CategoryTitle>
         <Spacer size="s" />
-        <List>{renderList(developmentSkills)}</List>
+        <ListContainer>{renderList(developmentSkills)}</ListContainer>
       </div>
       <Spacer size="l" />
       <div>
         <CategoryTitle>DESIGN</CategoryTitle>
         <Spacer size="s" />
-        <List>{renderList(designSkills)}</List>
+        <ListContainer>{renderList(designSkills)}</ListContainer>
       </div>
-    </StyledSkillsList>
+    </StyledList>
   );
 };
 
-export default SkillsList;
+export default List;

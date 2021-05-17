@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
-import { small } from '../styles/breakpoints';
-import { formatDuration } from '../utilities';
+import { small } from '../../styles/breakpoints';
+import { formatDuration } from '../../utilities';
 
 const Text = styled.span`
   @media screen and (max-width: ${small}) {

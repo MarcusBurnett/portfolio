@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { small } from '../styles/breakpoints';
-import { red, lightBlue, darkBlue, blue } from '../styles/colors';
-import { semiBold } from '../styles/fonts';
-import Spacer from './Spacer';
-import { useDynamicColors } from '../hooks';
+import { small } from '../../styles/breakpoints';
+import { red, lightBlue, darkBlue, blue } from '../../styles/colors';
+import { semiBold } from '../../styles/fonts';
+import Spacer from '../Spacer';
+import { useDynamicColors } from '../../hooks';
 
 const StyledInput = styled.div`
   display: flex;

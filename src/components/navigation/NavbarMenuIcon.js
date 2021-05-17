@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import Spacer from './Spacer';
-import { small } from '../styles/breakpoints';
+import Spacer from '../Spacer';
+import { small } from '../../styles/breakpoints';
 
 const Menu = styled.div`
   padding: 1rem;

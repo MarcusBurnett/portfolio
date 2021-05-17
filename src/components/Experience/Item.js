@@ -1,9 +1,9 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
-import { locationIcon } from '../assets/images';
-import { useTheme } from '../context/theme';
-import { fadeInAndSlideRight } from '../keyframes';
-import { small } from '../styles/breakpoints';
+import { locationIcon } from '../../assets/images';
+import { useTheme } from '../../context/theme';
+import { fadeInAndSlideRight } from '../../keyframes';
+import { small } from '../../styles/breakpoints';
 import {
   Background,
   HorizontalImageFadeLight,
@@ -11,9 +11,9 @@ import {
   VerticalImageFadeDark,
   HorizontalImageFadeDark,
   BackgroundImage,
-} from './BackgroundImageFade';
-import Spacer from './Spacer';
-import useDynamicColors from '../hooks/useDynamicColors';
+} from '../BackgroundImageFade';
+import Spacer from '../Spacer';
+import useDynamicColors from '../../hooks/useDynamicColors';
 
 const fadeInAndSlideLeft = keyframes`
 0% {
@@ -109,7 +109,7 @@ const LocationContainer = styled.div`
   display: flex;
 `;
 
-const ExperienceItem = ({ item, side, minHeight }) => {
+const Item = ({ item, side, minHeight }) => {
   const { theme, themeChanging } = useTheme();
   const { text } = useDynamicColors();
   const oppositeSide = side === 'right' ? 'left' : 'right';
@@ -156,4 +156,4 @@ const ExperienceItem = ({ item, side, minHeight }) => {
   );
 };
 
-export default ExperienceItem;
+export default Item;

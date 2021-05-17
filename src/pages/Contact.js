@@ -1,17 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import axios from 'axios';
-import ReCAPTCHA from 'react-google-recaptcha';
 import { contactBackground } from '../assets/images';
 import Spacer from '../components/Spacer';
-import Input from '../components/Input';
 import { useTheme } from '../context/theme';
-import { useToast } from '../context/toast';
-import Button from '../components/Button';
-import Textarea from '../components/Textarea';
-import { promiseTimeout } from '../utilities';
 import { darkBlue } from '../styles/colors';
 import {
   Background,
@@ -23,15 +14,7 @@ import {
 } from '../components/BackgroundImageFade';
 import { small, xsmall } from '../styles/breakpoints';
 import { fadeInAndSlideRight } from '../keyframes';
-
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .trim()
-    .email('Please enter a valid email address.')
-    .required('Please enter your email address.'),
-  name: Yup.string().trim().required('Please enter your name.'),
-  message: Yup.string().trim().required('Please enter your message.'),
-});
+import ContactForm from '../forms/ContactForm';
 
 const fadeInAndSlideLeft = keyframes`
 0% {
@@ -101,63 +84,8 @@ const Content = styled.div`
   }
 `;
 
-const ReCaptchaContainer = styled.div`
-  display: none;
-`;
-
 const Contact = () => {
-  const [submitting, setSubmitting] = useState(false);
   const { theme, themeChanging } = useTheme();
-  const recaptchaRef = useRef();
-  const { showSuccessToast, showErrorToast } = useToast();
-
-  const sendEmail = async (values, { resetForm }) => {
-    try {
-      const token = await Promise.race([
-        recaptchaRef.current.executeAsync(),
-        promiseTimeout(),
-      ]);
-
-      if (token) {
-        setSubmitting(true);
-        await axios({
-          method: 'POST',
-          url: 'https://formspree.io/f/mbjqdqpw',
-          data: values,
-        });
-
-        showSuccessToast('Success! Your message has been sent.', true);
-        resetForm();
-      } else {
-        showErrorToast('Unverified');
-      }
-    } catch (e) {
-      showErrorToast(e.message);
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const {
-    handleSubmit,
-    values,
-    errors,
-    setFieldValue,
-    setFieldTouched,
-    touched,
-    handleBlur,
-    isValid,
-  } = useFormik({
-    initialValues: { name: '', email: '', message: '' },
-    initialErrors: { error: 'invalid' },
-    onSubmit: sendEmail,
-    validationSchema: schema,
-  });
-
-  const setFieldValueAndTouched = (field, value) => {
-    setFieldTouched(field, true);
-    setFieldValue(field, value);
-  };
 
   return (
     <Container>
@@ -173,43 +101,7 @@ const Contact = () => {
       <Content>
         <Header theme={theme}>Get In Touch</Header>
         <Spacer size="l" />
-        <Input
-          name="name"
-          label="Name"
-          value={values.name}
-          onChange={(e) => setFieldValueAndTouched('name', e.target.value)}
-          onBlur={handleBlur('name')}
-          error={touched.name && errors.name}
-        />
-        <Input
-          name="email"
-          label="Email"
-          value={values.email}
-          onChange={(e) => setFieldValueAndTouched('email', e.target.value)}
-          onBlur={handleBlur('email')}
-          error={touched.email && errors.email}
-        />
-        <Textarea
-          name="message"
-          label="Message"
-          value={values.message}
-          onChange={(e) => setFieldValueAndTouched('message', e.target.value)}
-          onBlur={handleBlur('message')}
-          error={touched.message && errors.message}
-        />
-        <Spacer size="l" />
-        <Button onClick={handleSubmit} loading={submitting} disabled={!isValid}>
-          Send Message
-        </Button>
-        {process.env.REACT_APP_RECAPTCHA_KEY && (
-          <ReCaptchaContainer>
-            <ReCAPTCHA
-              ref={recaptchaRef}
-              size="invisible"
-              sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
-            />
-          </ReCaptchaContainer>
-        )}
+        <ContactForm />
       </Content>
     </Container>
   );

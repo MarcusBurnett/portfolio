@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components/macro';
-import { red } from '../styles/colors';
-import Card from './Card';
-import { profilePicture } from '../assets/images';
-import Spacer from './Spacer';
+import { red } from '../../styles/colors';
+import Card from '../Card';
+import { profilePicture } from '../../assets/images';
+import Spacer from '../Spacer';
 import Countdown from './Countdown';
-import { xsmall } from '../styles/breakpoints';
-import { fadeInAndSlideUp } from '../keyframes';
+import { xsmall } from '../../styles/breakpoints';
+import { fadeInAndSlideUp } from '../../keyframes';
 
-const Details = styled.div`
+const StyledDetails = styled.div`
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -100,8 +100,8 @@ const detailsListItems = [
   { label: 'Age:', value: <Countdown date={new Date(1995, 9, 20)} /> },
 ];
 
-const MyStoryDetails = () => (
-  <Details>
+const Details = () => (
+  <StyledDetails>
     <ProfilePictureCard backgroundPosition="left">
       <ProfilePicture src={profilePicture} alt="profile" />
     </ProfilePictureCard>
@@ -116,7 +116,7 @@ const MyStoryDetails = () => (
         </Fragment>
       ))}
     </DetailsList>
-  </Details>
+  </StyledDetails>
 );
 
-export default MyStoryDetails;
+export default Details;

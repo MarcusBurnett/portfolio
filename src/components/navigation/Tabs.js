@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
-import Spacer from './Spacer';
-import Card from './Card';
+import Spacer from '../Spacer';
+import Card from '../Card';
 import {
   midnightBlueLight,
   midnightBlueDark,
@@ -10,10 +10,10 @@ import {
   greyMedium,
   darkBlue,
   blue,
-} from '../styles/colors';
-import { useTheme } from '../context/theme';
-import { small, xsmall } from '../styles/breakpoints';
-import { useWindowDimensions, useTabs } from '../hooks';
+} from '../../styles/colors';
+import { useTheme } from '../../context/theme';
+import { small, xsmall } from '../../styles/breakpoints';
+import { useWindowDimensions, useTabs } from '../../hooks';
 
 const StyledTabs = styled.ul`
   @media screen and (max-width: ${small}) {
@@ -110,6 +110,11 @@ const Tabs = ({ setMenuOpen }) => {
   const { height: windowHeight } = useWindowDimensions();
   const { tabs } = useTabs();
 
+  const handleOnClick = () => {
+    setMenuOpen(false);
+    window.scrollTo(0, windowHeight);
+  };
+
   return (
     <StyledTabs>
       {tabs.map((tab) => (
@@ -122,10 +127,7 @@ const Tabs = ({ setMenuOpen }) => {
               theme={theme}
             >
               <StyledLink
-                onClick={() => {
-                  setMenuOpen(false);
-                  window.scrollTo(0, windowHeight);
-                }}
+                onClick={handleOnClick}
                 selected={tab.selected}
                 to={tab.path}
               >

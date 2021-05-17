@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import ReactModal from 'react-modal';
-import CardList from './CardList';
-import { fadeInAndSlideUp } from '../keyframes';
-import { xsmall } from '../styles/breakpoints';
-import projects from '../data/projects';
-import { midnightBlue, midnightBlueDark } from '../styles/colors';
-import { useTheme } from '../context/theme';
-import Spacer from './Spacer';
-import { crossIconBlue, crossIconWhite } from '../assets/images';
+import CardList from '../CardList';
+import { fadeInAndSlideUp } from '../../keyframes';
+import { xsmall } from '../../styles/breakpoints';
+import projects from '../../data/projects';
+import { midnightBlue, midnightBlueDark } from '../../styles/colors';
+import { useTheme } from '../../context/theme';
+import Spacer from '../Spacer';
+import { crossIconBlue, crossIconWhite } from '../../assets/images';
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
@@ -125,7 +125,7 @@ const CrossIcon = styled.img`
   height: 2rem;
 `;
 
-const ProjectsList = ({ isOpen, toggle }) => {
+const List = ({ isOpen, toggle }) => {
   const { theme } = useTheme();
 
   return (
@@ -148,4 +148,4 @@ const ProjectsList = ({ isOpen, toggle }) => {
   );
 };
 
-export default ProjectsList;
+export default List;

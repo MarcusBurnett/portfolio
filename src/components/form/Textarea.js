@@ -1,10 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components/macro';
-import { useTheme } from '../context/theme';
-import { small } from '../styles/breakpoints';
-import { blue, darkBlue, midnightBlue, red } from '../styles/colors';
-import { semiBold } from '../styles/fonts';
-import Spacer from './Spacer';
+import { useTheme } from '../../context/theme';
+import { small } from '../../styles/breakpoints';
+import { blue, darkBlue, midnightBlue, red } from '../../styles/colors';
+import { semiBold } from '../../styles/fonts';
+import Spacer from '../Spacer';
 
 const StyledTextarea = styled.div`
   display: flex;

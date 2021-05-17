@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import useDynamicColors from '../hooks/useDynamicColors';
+import useDynamicColors from '../../hooks/useDynamicColors';
 
 const StyledAnimatedRouteContainer = styled.div`
   width: 100%;

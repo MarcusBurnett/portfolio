@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import styled from 'styled-components/macro';
-import DarkModeToggle from './DarkModeToggle';
-import Spacer from './Spacer';
-import { darkBlue, blue } from '../styles/colors';
-import { useTheme } from '../context/theme';
-import { small, xsmall } from '../styles/breakpoints';
+import DarkModeToggle from '../DarkModeToggle';
+import Spacer from '../Spacer';
+import { darkBlue, blue } from '../../styles/colors';
+import { useTheme } from '../../context/theme';
+import { small, xsmall } from '../../styles/breakpoints';
 import NavbarMobile from './NavbarMobile';
 import Tabs from './Tabs';
 

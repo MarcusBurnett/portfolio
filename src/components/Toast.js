@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { useTheme } from '../context/theme';
 import { useToast } from '../context/toast';
 import { darkBlue, greyLight } from '../styles/colors';
-import Button from './Button';
+import Button from './form/Button';
 import Card from './Card';
 import { medium } from '../styles/fonts';
 import Spacer from './Spacer';

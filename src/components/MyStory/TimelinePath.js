@@ -1,0 +1,149 @@
+import React, { Fragment } from 'react';
+import styled from 'styled-components/macro';
+import { darkBlue, red } from '../../styles/colors';
+import Spacer from '../Spacer';
+import { small } from '../../styles/breakpoints';
+
+const Line = styled.div`
+  height: 4px;
+  background: ${({ isActive }) =>
+    isActive
+      ? `linear-gradient(
+    90deg,
+    rgba(221, 84, 42, 0) 0%,
+    rgba(221, 84, 42, 1) 50%,
+    rgba(221, 84, 42, 0) 100%
+  )`
+      : `linear-gradient(
+    90deg,
+    rgba(108, 108, 108, 0) 0%,
+    rgba(108, 108, 108, 1) 50%,
+    rgba(108, 108, 108, 0) 100%
+  )`};
+  border-radius: 50%;
+  width: 600px;
+  opacity: ${({ scale }) => scale};
+  transform: ${({ scale }) => `scale(${scale})`};
+  transition: all 1s ease;
+`;
+
+const LargeCircle = styled.div`
+  width: 70px;
+  height: 70px;
+  background: ${({ isActive }) =>
+    isActive
+      ? `radial-gradient(
+    circle,
+    rgba(221, 84, 42, 0.48) 0%,
+    rgba(221, 84, 42, 0.82) 100%
+  )`
+      : `radial-gradient(
+    circle,
+    rgba(108, 108, 108, 0.48) 0%,
+    rgba(108, 108, 108, 0.82) 100%
+  )`};
+  border: 2px solid ${({ isActive }) => (isActive ? red : '#6C6C6C')};
+  border-radius: 50%;
+  box-shadow: 0 0 0 10px
+    ${({ isActive }) =>
+      isActive ? 'rgba(221, 84, 42)' : 'rgba(108, 108, 108, 0.3)'};
+  transform: rotateY(10deg) rotateX(60deg);
+  transition: all 1s ease;
+`;
+
+const StyledTimelinePath = styled.div`
+  display: flex;
+  align-items: center;
+  transform: rotateY(40deg) rotateX(70deg) rotateZ(-20deg)
+    ${({ currentIndex }) => `translateX(-${currentIndex * 672}px)`};
+  position: absolute;
+  bottom: -80px;
+  left: -225px;
+  transform-origin: bottom left;
+  transition: all 1s ease;
+
+  @media screen and (max-width: ${small}) {
+    transform: scale(0.8) rotateY(40deg) rotateX(70deg) rotateZ(-20deg)
+      ${({ currentIndex }) => `translateX(-${currentIndex * 672}px)`};
+    left: -175px;
+    bottom: -60px;
+  }
+`;
+
+const VerticalLine = styled.div`
+  width: 1px;
+  background-image: linear-gradient(${red} 33%, rgba(255, 255, 255, 0) 0%);
+  background-position: center;
+  background-size: 5px 8px;
+  background-repeat: repeat-y;
+  height: calc(100% - 50px);
+  transform: ${({ isHidden }) => (isHidden ? 'scaleY(0)' : 'scaleY(1)')};
+  transform-origin: bottom;
+  transition: transform 0.5s ease;
+`;
+
+const SmallCircle = styled.div`
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid ${red};
+  border-radius: 50%;
+  transform: ${({ isHidden }) =>
+    isHidden ? 'translateY(50vh)' : 'translateY(0)'};
+  transform-origin: bottom;
+  opacity: ${({ isHidden }) => (isHidden ? 0 : 1)};
+  transition: all 0.5s ease;
+`;
+
+const LineContainer = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: calc(10vh + 1.3rem);
+
+  @media screen and (max-width: ${small}) {
+    padding-top: calc(120px + 1.3rem);
+  }
+`;
+
+const Year = styled.span`
+  font-size: 4rem;
+  color: ${({ theme }) => (theme === 'dark' ? '#ffffff' : darkBlue)};
+`;
+
+const TimelineCircleContainer = styled.div`
+  margin-top: 4.5rem;
+  transform: ${({ scale }) => `scale(${scale})`};
+  opacity: ${({ scale }) => scale};
+  transition: all 1s ease;
+`;
+
+const TimelinePath = ({ timelineMoving, currentIndex, items }) => (
+  <div>
+    <StyledTimelinePath currentIndex={currentIndex}>
+      {items.map((item, index) => (
+        <Fragment key={index.toString()}>
+          <Line
+            isActive={currentIndex >= index}
+            scale={1 + (currentIndex - index) / items.length}
+          />
+          <TimelineCircleContainer
+            scale={1 + (currentIndex - index) / items.length}
+          >
+            <LargeCircle isActive={currentIndex >= index} />
+            <Year isActive={currentIndex >= index}>{item.year}</Year>
+          </TimelineCircleContainer>
+        </Fragment>
+      ))}
+    </StyledTimelinePath>
+    <LineContainer>
+      <SmallCircle isHidden={timelineMoving} />
+      <Spacer />
+      <VerticalLine isHidden={timelineMoving} />
+    </LineContainer>
+  </div>
+);
+
+export default TimelinePath;

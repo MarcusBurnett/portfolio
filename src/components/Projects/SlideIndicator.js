@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import { arrowIcon, showAllIcon } from '../assets/images';
-import { small } from '../styles/breakpoints';
-import Spacer from './Spacer';
+import { arrowIcon, showAllIcon } from '../../assets/images';
+import { small } from '../../styles/breakpoints';
+import Spacer from '../Spacer';
 
 const Container = styled.div`
   display: flex;

@@ -1,14 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import styled from 'styled-components/macro';
 import { Redirect, useLocation } from 'react-router-dom';
-import SlideIndicator from '../components/SlideIndicator';
+import SlideIndicator from '../components/Projects/SlideIndicator';
 import projects from '../data/projects';
-import Project from '../components/Project';
-import AnimatedRoute from '../components/AnimatedRoute';
+import Project from '../components/Projects/Project';
+import AnimatedRoute from '../components/navigation/AnimatedRoute';
 import { small } from '../styles/breakpoints';
 import { midnightBlue } from '../styles/colors';
 import { useTheme } from '../context/theme';
-import ProjectsList from '../components/ProjectList';
+import List from '../components/Projects/List';
 
 const Container = styled.div`
   width: 100%;
@@ -74,10 +74,7 @@ const Projects = () => {
           </Fragment>
         ))}
       </ProjectContainer>
-      <ProjectsList
-        isOpen={listOpen}
-        toggle={() => setListOpen((prev) => !prev)}
-      />
+      <List isOpen={listOpen} toggle={() => setListOpen((prev) => !prev)} />
     </Container>
   );
 };

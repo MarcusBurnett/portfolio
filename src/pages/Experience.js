@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import ExperienceItem from '../components/ExperienceItem';
+import Item from '../components/Experience/Item';
 import { useTheme } from '../context/theme';
 import experience from '../data/experience';
 import { midnightBlue } from '../styles/colors';
@@ -23,7 +23,7 @@ const Experience = () => {
     <Container theme={theme}>
       {experience.map((item, i) => (
         <div key={item.title}>
-          <ExperienceItem
+          <Item
             item={item}
             side={i % 2 === 0 ? 'left' : 'right'}
             minHeight={`${100 / experience.length}%`}
