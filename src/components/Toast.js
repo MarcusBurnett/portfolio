@@ -7,12 +7,11 @@ import Button from './Button';
 import Card from './Card';
 import { medium } from '../styles/fonts';
 import Spacer from './Spacer';
-import { successIcon, errorIcon } from '../assets/images';
 
 const Container = styled.div`
   position: fixed;
   width: 100%;
-  max-width: 50rem;
+  max-width: 30rem;
   top: 2rem;
   transform: ${({ showToast }) =>
     `translateY(${showToast ? '0rem' : '-20rem'})`};
@@ -22,6 +21,7 @@ const Container = styled.div`
 
   @media screen and (min-width: 900px) {
     max-width: 60rem;
+    margin: 0 25%;
   }
 `;
 
@@ -58,14 +58,9 @@ const Content = styled.div`
   }
 `;
 
-const Icon = styled.img`
-  width: 2rem;
-  margin-right: 1rem;
-`;
-
 const Toast = () => {
-  const { message, type, hideToast, visible } = useToast();
-  const [showToast, setShowToast] = useState(false);
+  const { message, hideToast, visible } = useToast();
+  const [showToast, setShowToast] = useState(visible);
   const { theme } = useTheme();
 
   const onClickOK = () => {
@@ -91,14 +86,6 @@ const Toast = () => {
         position="center"
       >
         <Content>
-          {(type === 'success' || type === 'error') && (
-            <Icon
-              src={
-                (type === 'success' && successIcon) ||
-                (type === 'error' && errorIcon)
-              }
-            />
-          )}
           <Text color={(theme === 'dark' && '#ffffff') || darkBlue}>
             {message}
           </Text>

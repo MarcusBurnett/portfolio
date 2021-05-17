@@ -25,6 +25,10 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+body {
+  transition: background-color 0.4s ease;
+}
 `;
 
 export default GlobalStyles;

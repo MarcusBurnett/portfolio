@@ -1,11 +1,13 @@
 import React, { useState, useContext, createContext, useEffect } from 'react';
+import { midnightBlue } from '../styles/colors';
 
 const ThemeContext = createContext();
 
 ThemeContext.displayName = 'ThemeContext';
 
 const ThemeProvider = (props) => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
+  const [themeChanging, setThemeChanging] = useState(false);
 
   useEffect(() => {
     const getTheme = async () => {
@@ -21,11 +23,20 @@ const ThemeProvider = (props) => {
     getTheme();
   }, []);
 
+  useEffect(() => {
+    document.body.style.backgroundColor =
+      theme === 'dark' ? midnightBlue : '#FFFFFF';
+  }, [theme]);
+
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
 
     localStorage.setItem('theme', newTheme);
     setTheme(newTheme);
+    setThemeChanging(true);
+    setTimeout(() => {
+      setThemeChanging(false);
+    }, 400);
   };
 
   return (
@@ -33,6 +44,7 @@ const ThemeProvider = (props) => {
       value={{
         theme,
         toggleTheme,
+        themeChanging,
       }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

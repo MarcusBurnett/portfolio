@@ -12,7 +12,7 @@ const Image = styled.img`
 
 const GooglePlay = () => (
   <Container>
-    <a target="_blank" rel="noopener noreferrer" href="">
+    <a target="_blank" rel="noopener noreferrer" href="/">
       <Image src={googlePlayIcon} />
     </a>
   </Container>

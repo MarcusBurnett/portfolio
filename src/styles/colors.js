@@ -1,10 +1,10 @@
 export const blue = '#3E4695';
 export const darkBlue = '#17192C';
 export const lightBlue = '#454EA8';
-export const yellow = '#D9B334';
 export const greyDark = '#85899D';
 export const greyMedium = '#CACFE6';
 export const greyLight = '#ECEEF8';
-export const red = '##DD542A';
+export const red = '#DD542A';
 export const midnightBlue = '#1A1B29';
+export const midnightBlueDark = '#111326';
 export const midnightBlueLight = '#1D2034';

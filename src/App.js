@@ -1,21 +1,21 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import AppProviders from './context';
 import Wrapper from './components/Wrapper';
 import Toast from './components/Toast';
-import './firebase';
-import Left from './pages/Left';
-import Right from './pages/Right';
+import Header from './components/Header';
+import Pages from './pages/Pages';
 
-function App() {
-  return (
-    <AppProviders>
+const App = () => (
+  <AppProviders>
+    <Router>
       <Wrapper>
-        <Left />
-        <Right />
+        <Header />
+        <Pages />
       </Wrapper>
-      <Toast />
-    </AppProviders>
-  );
-}
+    </Router>
+    <Toast />
+  </AppProviders>
+);
 
 export default App;

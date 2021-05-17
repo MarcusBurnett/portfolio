@@ -1,44 +1,60 @@
 import React, { memo } from 'react';
 import styled from 'styled-components/macro';
-import { darkBlue } from '../styles/colors';
+import { useDynamicColors } from '../hooks';
+
+const Container = styled.div`
+  display: flex;
+  position: relative;
+`;
 
 const StyledCard = styled.div`
+  flex: 1;
   position: relative;
-  padding: ${({ padding = '2rem' }) => padding};
-  border-radius: ${({ position }) =>
-    (position === 'left' && '0 1rem 1rem 0') ||
-    (position === 'right' && '1rem 0 0 1rem') ||
-    '1rem'};
-  background-color: ${({ color }) => color};
+  padding: ${({ padding = '1rem' }) => padding};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   display: flex;
   flex-direction: column;
-  align-items: ${({ position }) =>
-    (position === 'left' && 'flex-end') ||
-    (position === 'right' && 'flex-start') ||
-    'center'};
+  align-items: center;
   box-shadow: 0 1rem 2rem #00000033;
-  margin: ${({ position }) =>
-    (position === 'left' && '0 2rem 0 0') ||
-    (position === 'right' && '0 0 0 2rem') ||
-    (position === 'center' && '0 1rem')};
   box-sizing: border-box;
+  transition: background-color 0.4s ease;
+`;
+
+const Background = styled.div`
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-color: ${({ borderColor }) => borderColor};
+  border-style: solid;
+  border-width: 0;
+  top: 5px;
+  right: ${({ position }) => position === 'left' && '5px'};
+  left: ${({ position }) => position === 'right' && '5px'};
+  transition: all 0.5s ease;
 `;
 
 const Card = ({
   children,
-  color = darkBlue,
-  position = 'left',
-  padding,
   className,
-}) => (
-  <StyledCard
-    className={className}
-    color={color}
-    position={position}
-    padding={padding}
-  >
-    {children}
-  </StyledCard>
-);
+  showBackground,
+  backgroundPosition = 'right',
+}) => {
+  const { card, border } = useDynamicColors();
+
+  return (
+    <Container className={className}>
+      <Background
+        position={backgroundPosition}
+        visible={showBackground}
+        borderColor={border}
+        className="background"
+      />
+      <StyledCard backgroundColor={card} className="card">
+        {children}
+      </StyledCard>
+    </Container>
+  );
+};
 
 export default memo(Card);

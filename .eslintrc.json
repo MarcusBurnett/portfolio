@@ -1,4 +1,4 @@
 
 { 
-  "extends": "@airtimerewards/eslint-config"
+  "extends": "@marcusburnett/eslint-config"
 }

@@ -1,9 +1,10 @@
 import React from 'react';
-import styled, { css } from 'styled-components/macro';
-import { useTheme } from '../context/theme';
-import { blue, darkBlue, midnightBlue, red, yellow } from '../styles/colors';
+import styled from 'styled-components/macro';
+import { small } from '../styles/breakpoints';
+import { red, lightBlue, darkBlue, blue } from '../styles/colors';
 import { semiBold } from '../styles/fonts';
 import Spacer from './Spacer';
+import { useDynamicColors } from '../hooks';
 
 const StyledInput = styled.div`
   display: flex;
@@ -14,21 +15,22 @@ const InputField = styled.input`
   flex: 1;
   background-color: transparent;
   padding: 0 1rem;
-  min-height: 5rem;
+  min-height: 4rem;
   border-radius: 0.5rem;
-  border: 0.1rem solid
-    ${({ theme, error }) =>
-      (error && red) || (theme === 'dark' && '#FFFFFF') || blue};
+  border: 0.1rem solid ${({ borderColor }) => borderColor};
   -webkit-appearance: none;
-  color: ${({ theme }) => (theme === 'dark' ? '#ffffff' : darkBlue)};
+  color: ${({ color }) => color};
+  transition: border 0.4s ease, box-shadow 0.4s ease;
 
   &:focus {
     outline: none;
-    ${({ $showStatus, value }) =>
-      (!$showStatus || !value) &&
-      css`
-        border-color: ${({ theme }) => (theme === 'dark' ? yellow : darkBlue)};
-      `};
+    border-color: ${({ borderColorFocus }) => borderColorFocus};
+    box-shadow: 0 0 0 1px ${({ borderColorFocus }) => borderColorFocus};
+  }
+
+  @media screen and (max-width: ${small}) {
+    font-size: 2rem;
+    min-height: 5rem;
   }
 `;
 
@@ -40,16 +42,23 @@ const InputContainer = styled.div`
 
 const LabelContainer = styled.div`
   position: absolute;
-  background-color: ${({ theme }) =>
-    theme === 'dark' ? midnightBlue : '#ffffff'};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   padding-right: 0.5rem;
+  margin-top: 0.5rem;
+  margin-left: -0.1rem;
+  font-size: 1.3rem;
+  border-radius: 3px 3px 3px 0;
+  transition: background-color 0.4s ease;
 `;
 
 const Label = styled.label`
-  color: ${({ theme, error }) =>
-    (error && red) || (theme === 'dark' && '#FFFFFF') || blue};
+  color: ${({ color, error }) => (error && red) || color};
   font-weight: ${semiBold};
-  font-size: 1.3rem;
+  transition: color 0.4s ease;
+
+  @media screen and (max-width: ${small}) {
+    font-size: 1.6rem;
+  }
 `;
 
 const Error = styled.span`
@@ -58,7 +67,16 @@ const Error = styled.span`
 `;
 
 const Input = ({ name, label, onChange, value, error }) => {
-  const { theme } = useTheme();
+  const {
+    text,
+    inputBorder,
+    inputBorderFocus,
+    page,
+    inputLabel,
+  } = useDynamicColors(
+    { inputBorderFocus: darkBlue, inputLabel: blue },
+    { inputBorderFocus: lightBlue, inputLabel: '#FFFFFF' }
+  );
 
   return (
     <StyledInput>
@@ -70,13 +88,20 @@ const Input = ({ name, label, onChange, value, error }) => {
           value={value}
           onChange={onChange}
           error={error}
-          theme={theme}
+          borderColor={(error && red) || inputBorder}
+          borderColorFocus={inputBorderFocus}
+          color={text}
         />
       </InputContainer>
       <Spacer size="s" />
       <Error error={error}>{error || '-'}</Error>
-      <LabelContainer theme={theme}>
-        <Label error={error} theme={theme} className={label} htmlFor={name}>
+      <LabelContainer backgroundColor={page}>
+        <Label
+          error={error}
+          color={inputLabel}
+          className={label}
+          htmlFor={name}
+        >
           {label}
         </Label>
       </LabelContainer>

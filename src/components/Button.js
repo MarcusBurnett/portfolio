@@ -1,36 +1,39 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { blue, darkBlue, yellow } from '../styles/colors';
+import { blue, darkBlue, red } from '../styles/colors';
 import Spinner from './Spinner';
 import { medium } from '../styles/fonts';
-import { useTheme } from '../context/theme';
+import { small as smallBreakpoint } from '../styles/breakpoints';
+import useThemeSelect from '../hooks/useThemeSelect';
 
 const StyledButton = styled.button`
   font-weight: ${medium};
-  color: ${({ theme }) => (theme === 'dark' ? darkBlue : '#ffffff')};
+  color: #ffffff;
   position: relative;
-  min-height: ${({ small }) => (small ? '3rem' : '5rem')};
+  min-height: ${({ small }) => (small ? '3rem' : '4.5rem')};
   width: ${({ small }) => (small ? 'auto' : '100%')};
   padding: 0 3rem;
   border-radius: 0.5rem;
   transition: all 0.3s ease;
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
-  border: 0.1rem solid ${({ theme }) => (theme === 'dark' ? yellow : blue)};
-  background-color: ${({ theme }) => (theme === 'dark' ? yellow : blue)};
+  border: ${red};
+  background-color: ${red};
+  font-size: 1.4rem;
 
   &:hover {
-    background-color: ${({ theme }) =>
-      theme === 'dark' ? `${yellow}CC` : `${blue}CC`};
-    border: 0.1rem solid
-      ${({ theme }) => (theme === 'dark' ? `${yellow}CC` : `${blue}CC`)};
+    background-color: ${({ hoverBackgroundColor }) => hoverBackgroundColor};
+    border: 0.1rem solid ${red}CC;
   }
 
   &:focus {
     outline: none;
-    border: 0.1rem solid
-      ${({ theme }) => (theme === 'dark' ? '#FFFFFF' : darkBlue)};
-    color: ${({ theme }) => (theme === 'dark' ? darkBlue : '#ffffff')};
+    border: 0.1rem solid ${({ focusBorderColor }) => focusBorderColor};
+  }
+
+  @media screen and (max-width: ${smallBreakpoint}) {
+    font-size: 1.8rem;
+    min-height: ${({ small }) => (small ? '3.5rem' : '5rem')};
   }
 `;
 
@@ -42,14 +45,16 @@ const Button = ({
   type = 'button',
   small,
 }) => {
-  const { theme } = useTheme();
+  const hoverBackgroundColor = useThemeSelect(`${red}CC`, `${blue}CC`);
+  const focusBorderColor = useThemeSelect('#FFFFFF', darkBlue);
 
   return (
     <StyledButton
       onClick={onClick}
       disabled={disabled || loading}
       type={type}
-      theme={theme}
+      hoverBackgroundColor={hoverBackgroundColor}
+      focusBorderColor={focusBorderColor}
       small={small}
     >
       {loading ? <Spinner /> : children}
