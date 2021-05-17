@@ -3,6 +3,7 @@ import fadeInAndSlideLeft from './fadeInAndSlideLeft';
 import fadeInAndSlideUp from './fadeInAndSlideUp';
 import fadeInAndSlideDown from './fadeInAndSlideDown';
 import fadeInAndSlideRight from './fadeInAndSlideRight';
+import backgroundLineMobile from './backgroundLineMobile';
 
 export {
   fadeIn,
@@ -10,4 +11,5 @@ export {
   fadeInAndSlideUp,
   fadeInAndSlideRight,
   fadeInAndSlideDown,
+  backgroundLineMobile,
 };

@@ -14,8 +14,12 @@ import {
 import { useTheme } from '../../context/theme';
 import { small, xsmall } from '../../styles/breakpoints';
 import { useWindowDimensions, useTabs } from '../../hooks';
+import { fadeInAndSlideRight } from '../../keyframes';
 
 const StyledTabs = styled.ul`
+  opacity: 0;
+  animation: 0.8s ${fadeInAndSlideRight} ease forwards;
+
   @media screen and (max-width: ${small}) {
     width: 100%;
   }

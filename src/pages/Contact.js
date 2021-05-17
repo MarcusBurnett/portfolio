@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 import { contactBackground } from '../assets/images';
 import Spacer from '../components/Spacer';
 import { useTheme } from '../context/theme';
@@ -13,19 +13,8 @@ import {
   HorizontalImageFadeDark,
 } from '../components/BackgroundImageFade';
 import { small, xsmall } from '../styles/breakpoints';
-import { fadeInAndSlideRight } from '../keyframes';
+import { fadeInAndSlideLeft, fadeInAndSlideRight } from '../keyframes';
 import ContactForm from '../forms/ContactForm';
-
-const fadeInAndSlideLeft = keyframes`
-0% {
-	transform: translateX(20%);
-  opacity: 0
-}
-100% {
-	transform: translateX(0%);
-  opacity: 1;
-}
-`;
 
 const Container = styled.div`
   display: flex;

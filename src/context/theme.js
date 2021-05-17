@@ -1,4 +1,9 @@
-import React, { useState, useContext, createContext, useEffect } from 'react';
+import React, {
+  useState,
+  useContext,
+  createContext,
+  useLayoutEffect,
+} from 'react';
 import { midnightBlue } from '../styles/colors';
 
 const ThemeContext = createContext();
@@ -9,7 +14,7 @@ const ThemeProvider = (props) => {
   const [theme, setTheme] = useState('dark');
   const [themeChanging, setThemeChanging] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const getTheme = async () => {
       try {
         const savedTheme = await localStorage.getItem('theme');
@@ -23,7 +28,7 @@ const ThemeProvider = (props) => {
     getTheme();
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.body.style.backgroundColor =
       theme === 'dark' ? midnightBlue : '#FFFFFF';
   }, [theme]);

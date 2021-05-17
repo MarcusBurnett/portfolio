@@ -7,6 +7,7 @@ import Navbar from './navigation/Navbar';
 import Background from './Background';
 import { small, medium, xsmall } from '../styles/breakpoints';
 import { useThemeSelect } from '../hooks';
+import { fadeInAndSlideUp } from '../keyframes';
 
 const StyledHeader = styled.div`
   background-color: ${({ backgroundColor }) => backgroundColor};
@@ -41,6 +42,8 @@ const Container = styled.div`
   padding-right: 20px;
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  animation: 0.8s ${fadeInAndSlideUp} 0.2s ease forwards;
 
   @media screen and (max-width: ${small}) {
     align-items: center;

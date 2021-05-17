@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { useTheme } from '../context/theme';
+import { fadeIn } from '../keyframes';
 import { small } from '../styles/breakpoints';
 
 const StyledWrapper = styled.div`
@@ -9,6 +10,8 @@ const StyledWrapper = styled.div`
   margin: 0 auto;
   min-height: 100vh;
   width: 100vw;
+  opacity: 0;
+  animation: 1s ${fadeIn} ease forwards;
 
   @media screen and (max-width: ${small}) {
     flex-direction: column;

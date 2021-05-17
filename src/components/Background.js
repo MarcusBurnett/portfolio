@@ -1,23 +1,9 @@
 import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 import { red } from '../styles/colors';
-import { fadeIn } from '../keyframes';
+import { backgroundLineMobile, fadeIn } from '../keyframes';
 import { small } from '../styles/breakpoints';
 import lineStyles from '../data/backgroundLineStyles';
-
-const animate = keyframes`
-0% {
-	transform: rotateZ(-45deg) translate(0, 0);
-  opacity: 0;
-}
-50% {
-  opacity: 0.3;
-}
-100% {
-  transform: rotateZ(-45deg) translate(200%, 200%);
-  opacity: 0;
-}
-`;
 
 const StyledBackground = styled.div`
   display: flex;
@@ -44,14 +30,13 @@ const Line = styled.div`
     `transform ${Math.max(0.3, index * 0.05)}s ease`};
   transform: rotateZ(-45deg)
     ${({ x, y, index }) => {
-      if (
+      const isMouseCloseToLine =
         x > Number(lineStyles[index]?.left.slice(0, -2)) &&
         x < Number(lineStyles[index]?.left.slice(0, -2)) + 200 &&
         y > Number(lineStyles[index]?.top.slice(0, -2)) &&
-        y < Number(lineStyles[index]?.top.slice(0, -2)) + 200
-      ) {
-        return `translateX(${index * 3}px)`;
-      }
+        y < Number(lineStyles[index]?.top.slice(0, -2)) + 200;
+
+      if (isMouseCloseToLine) return `translateX(${index * 3}px)`;
 
       return 'translateX(0)';
     }};
@@ -59,7 +44,7 @@ const Line = styled.div`
   @media screen and (max-width: ${small}) {
     animation: ${({ index }) => 5 + index}s linear
       ${({ index }) => (index % 2 === 0 ? 'alternate-reverse' : 'alternate')}
-      infinite ${animate};
+      infinite ${backgroundLineMobile};
   }
 `;
 

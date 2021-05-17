@@ -57,7 +57,7 @@ const StyledTimelinePath = styled.div`
   transform: rotateY(40deg) rotateX(70deg) rotateZ(-20deg)
     ${({ currentIndex }) => `translateX(-${currentIndex * 672}px)`};
   position: absolute;
-  bottom: -80px;
+  bottom: -120px;
   left: -225px;
   transform-origin: bottom left;
   transition: all 1s ease;
@@ -76,10 +76,14 @@ const VerticalLine = styled.div`
   background-position: center;
   background-size: 5px 8px;
   background-repeat: repeat-y;
-  height: calc(100% - 50px);
+  height: calc(100% - 20px);
   transform: ${({ isHidden }) => (isHidden ? 'scaleY(0)' : 'scaleY(1)')};
   transform-origin: bottom;
   transition: transform 0.5s ease;
+
+  @media screen and (max-width: ${small}) {
+    height: calc(100% - 50px);
+  }
 `;
 
 const SmallCircle = styled.div`

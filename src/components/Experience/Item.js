@@ -1,8 +1,8 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 import { locationIcon } from '../../assets/images';
 import { useTheme } from '../../context/theme';
-import { fadeInAndSlideRight } from '../../keyframes';
+import { fadeInAndSlideLeft, fadeInAndSlideRight } from '../../keyframes';
 import { small } from '../../styles/breakpoints';
 import {
   Background,
@@ -14,17 +14,6 @@ import {
 } from '../BackgroundImageFade';
 import Spacer from '../Spacer';
 import useDynamicColors from '../../hooks/useDynamicColors';
-
-const fadeInAndSlideLeft = keyframes`
-0% {
-	transform: translateX(20%);
-  opacity: 0
-}
-100% {
-	transform: translateX(0%);
-  opacity: 1;
-}
-`;
 
 const Container = styled.div`
   min-height: ${({ minHeight = '100%' }) => minHeight};
