@@ -1,17 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { locationIcon } from '../../assets/images';
-import { useTheme } from '../../context/theme';
 import { fadeInAndSlideLeft, fadeInAndSlideRight } from '../../keyframes';
 import { small } from '../../styles/breakpoints';
-import {
-  Background,
-  HorizontalImageFadeLight,
-  VerticalImageFadeLight,
-  VerticalImageFadeDark,
-  HorizontalImageFadeDark,
-  BackgroundImage,
-} from '../BackgroundImageFade';
+import BackgroundImageFade from '../BackgroundImageFade';
 import Spacer from '../Spacer';
 import useDynamicColors from '../../hooks/useDynamicColors';
 
@@ -99,21 +91,18 @@ const LocationContainer = styled.div`
 `;
 
 const Item = ({ item, side, minHeight }) => {
-  const { theme, themeChanging } = useTheme();
   const { text } = useDynamicColors();
   const oppositeSide = side === 'right' ? 'left' : 'right';
 
   return (
     <Container side={side} minHeight={minHeight}>
-      <Background themeChanging={themeChanging}>
-        <BackgroundImageContainer side={side}>
-          <BackgroundImage src={item.image} alt="background" />
-          <VerticalImageFadeLight side={oppositeSide} theme={theme} />
-          <HorizontalImageFadeLight side={oppositeSide} theme={theme} />
-          <VerticalImageFadeDark side={oppositeSide} theme={theme} />
-          <HorizontalImageFadeDark side={oppositeSide} theme={theme} />
-        </BackgroundImageContainer>
-      </Background>
+      <BackgroundImageContainer side={side}>
+        <BackgroundImageFade
+          image={item.image}
+          alt={item.title}
+          side={oppositeSide}
+        />
+      </BackgroundImageContainer>
       <Content side={side}>
         <Header color={text}>{item.title}</Header>
         <Spacer size="s" />

@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components/macro';
-import { darkBlue, red } from '../../styles/colors';
+import { red } from '../../styles/colors';
 import Spacer from '../Spacer';
 import { small } from '../../styles/breakpoints';
+import useDynamicColors from '../../hooks/useDynamicColors';
 
 const Line = styled.div`
   height: 4px;
@@ -22,7 +23,7 @@ const Line = styled.div`
   )`};
   border-radius: 50%;
   width: 600px;
-  opacity: ${({ scale }) => scale};
+  opacity: ${({ scale }) => (scale === 1 ? scale : scale * 0.6)};
   transform: ${({ scale }) => `scale(${scale})`};
   transition: all 1s ease;
 `;
@@ -57,7 +58,7 @@ const StyledTimelinePath = styled.div`
   transform: rotateY(40deg) rotateX(70deg) rotateZ(-20deg)
     ${({ currentIndex }) => `translateX(-${currentIndex * 672}px)`};
   position: absolute;
-  bottom: -120px;
+  bottom: -90px;
   left: -225px;
   transform-origin: bottom left;
   transition: all 1s ease;
@@ -76,14 +77,10 @@ const VerticalLine = styled.div`
   background-position: center;
   background-size: 5px 8px;
   background-repeat: repeat-y;
-  height: calc(100% - 20px);
+  height: calc(100% - 50px);
   transform: ${({ isHidden }) => (isHidden ? 'scaleY(0)' : 'scaleY(1)')};
   transform-origin: bottom;
   transition: transform 0.5s ease;
-
-  @media screen and (max-width: ${small}) {
-    height: calc(100% - 50px);
-  }
 `;
 
 const SmallCircle = styled.div`
@@ -114,40 +111,49 @@ const LineContainer = styled.div`
 
 const Year = styled.span`
   font-size: 4rem;
-  color: ${({ theme }) => (theme === 'dark' ? '#ffffff' : darkBlue)};
+  color: ${({ color }) => color};
 `;
 
 const TimelineCircleContainer = styled.div`
   margin-top: 4.5rem;
   transform: ${({ scale }) => `scale(${scale})`};
-  opacity: ${({ scale }) => scale};
+  opacity: ${({ scale }) => (scale === 1 ? scale : scale * 0.6)};
   transition: all 1s ease;
 `;
 
-const TimelinePath = ({ timelineMoving, currentIndex, items }) => (
-  <div>
-    <StyledTimelinePath currentIndex={currentIndex}>
-      {items.map((item, index) => (
-        <Fragment key={index.toString()}>
-          <Line
-            isActive={currentIndex >= index}
-            scale={1 + (currentIndex - index) / items.length}
-          />
-          <TimelineCircleContainer
-            scale={1 + (currentIndex - index) / items.length}
-          >
-            <LargeCircle isActive={currentIndex >= index} />
-            <Year isActive={currentIndex >= index}>{item.year}</Year>
-          </TimelineCircleContainer>
-        </Fragment>
-      ))}
-    </StyledTimelinePath>
-    <LineContainer>
-      <SmallCircle isHidden={timelineMoving} />
-      <Spacer />
-      <VerticalLine isHidden={timelineMoving} />
-    </LineContainer>
-  </div>
-);
+const TimelinePath = ({ timelineMoving, currentIndex, items }) => {
+  const { text } = useDynamicColors();
+
+  return (
+    <div>
+      <StyledTimelinePath currentIndex={currentIndex}>
+        {items.map((item, index) => {
+          const scale = 1 + (currentIndex - index) / items.length;
+
+          return (
+            <Fragment key={index.toString()}>
+              <Line
+                color={text}
+                isActive={currentIndex >= index}
+                scale={scale}
+              />
+              <TimelineCircleContainer scale={scale}>
+                <LargeCircle isActive={currentIndex >= index} />
+                <Year scale={scale} isActive={currentIndex >= index}>
+                  {item.year}
+                </Year>
+              </TimelineCircleContainer>
+            </Fragment>
+          );
+        })}
+      </StyledTimelinePath>
+      <LineContainer>
+        <SmallCircle isHidden={timelineMoving} />
+        <Spacer />
+        <VerticalLine isHidden={timelineMoving} />
+      </LineContainer>
+    </div>
+  );
+};
 
 export default TimelinePath;

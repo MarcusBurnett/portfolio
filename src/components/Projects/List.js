@@ -5,10 +5,10 @@ import CardList from '../CardList';
 import { fadeInAndSlideUp } from '../../keyframes';
 import { xsmall } from '../../styles/breakpoints';
 import projects from '../../data/projects';
-import { midnightBlue, midnightBlueDark } from '../../styles/colors';
-import { useTheme } from '../../context/theme';
 import Spacer from '../Spacer';
 import { crossIconBlue, crossIconWhite } from '../../assets/images';
+import useDynamicColors from '../../hooks/useDynamicColors';
+import useThemeSelect from '../../hooks/useThemeSelect';
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
@@ -62,8 +62,7 @@ const StyledModal = styled(ReactModalAdapter).attrs({
     max-width: 400px;
     padding: 2rem;
     border: 0;
-    background-color: ${({ theme }) =>
-      theme === 'dark' ? midnightBlue : '#FFFFFF'};
+    background-color: ${({ backgroundColor }) => backgroundColor};
     border-radius: 0.5rem;
   }
 
@@ -84,7 +83,7 @@ const StyledModal = styled(ReactModalAdapter).attrs({
 
 const ListContainer = styled.div`
   opacity: 0;
-  animation: 0.8s ${fadeInAndSlideUp} ease 0.7s forwards;
+  animation: 0.8s ${fadeInAndSlideUp} ease 0.3s forwards;
   justify-content: center;
 `;
 
@@ -110,7 +109,7 @@ const StyledCardList = styled(CardList)`
 `;
 
 const Header = styled.h1`
-  color: ${({ theme }) => (theme === 'dark' ? '#FFFFFF' : midnightBlueDark)};
+  color: ${({ color }) => color};
   font-size: 2.2rem;
 `;
 
@@ -126,14 +125,15 @@ const CrossIcon = styled.img`
 `;
 
 const List = ({ isOpen, toggle }) => {
-  const { theme } = useTheme();
+  const { page, text } = useDynamicColors();
+  const cross = useThemeSelect(crossIconBlue, crossIconWhite);
 
   return (
-    <StyledModal theme={theme} isOpen={isOpen} onRequestClose={toggle}>
+    <StyledModal backgroundColor={page} isOpen={isOpen} onRequestClose={toggle}>
       <HeaderContainer>
-        <Header theme={theme}>Projects</Header>
+        <Header color={text}>Projects</Header>
         <CrossIcon
-          src={theme === 'dark' ? crossIconWhite : crossIconBlue}
+          src={cross}
           alt="close modal"
           onClick={toggle}
           onKeyPress={toggle}

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { darkBlue } from '../../styles/colors';
 import Spacer from '../Spacer';
 import { useTheme } from '../../context/theme';
 import { small } from '../../styles/breakpoints';
+import { useThemeSelect, useDynamicColors } from '../../hooks';
 
 const ImageContainer = styled.div`
   width: 60%;
@@ -40,7 +40,7 @@ const HorizontalImageFadeLight = styled(ImageFade)`
     rgba(255, 255, 255, 1) 0%,
     rgba(255, 255, 255, 0.3) 100%
   );
-  opacity: ${({ theme }) => (theme === 'light' ? 1 : 0)};
+  opacity: ${({ opacity }) => opacity};
 `;
 
 const VerticalImageFadeLight = styled(ImageFade)`
@@ -49,7 +49,7 @@ const VerticalImageFadeLight = styled(ImageFade)`
     rgba(255, 255, 255, 1) 0%,
     rgba(255, 255, 255, 0.3) 100%
   );
-  opacity: ${({ theme }) => (theme === 'light' ? 1 : 0)};
+  opacity: ${({ opacity }) => opacity};
 `;
 
 const HorizontalImageFadeDark = styled(ImageFade)`
@@ -58,7 +58,7 @@ const HorizontalImageFadeDark = styled(ImageFade)`
     rgba(26, 27, 41, 1) 0%,
     rgba(26, 27, 41, 0.3) 100%
   );
-  opacity: ${({ theme }) => (theme === 'dark' ? 1 : 0)};
+  opacity: ${({ opacity }) => opacity};
 `;
 
 const VerticalImageFadeDark = styled(ImageFade)`
@@ -67,7 +67,7 @@ const VerticalImageFadeDark = styled(ImageFade)`
     rgba(26, 27, 41, 1) 0%,
     rgba(26, 27, 41, 0.3) 100%
   );
-  opacity: ${({ theme }) => (theme === 'dark' ? 1 : 0)};
+  opacity: ${({ opacity }) => opacity};
 `;
 
 const Content = styled.div`
@@ -87,11 +87,11 @@ const Content = styled.div`
 
 const Title = styled.h2`
   font-size: 2.6rem;
-  color: ${({ theme }) => (theme === 'dark' ? '#ffffff' : darkBlue)};
+  color: ${({ color }) => color};
 `;
 
 const Paragraph = styled.p`
-  color: ${({ theme }) => (theme === 'dark' ? '#ffffff' : darkBlue)};
+  color: ${({ color }) => color};
   max-width: 700px;
   min-width: 300px;
 `;
@@ -103,23 +103,25 @@ const Background = styled.div`
 `;
 
 const TimelineItem = ({ isHidden, item }) => {
-  const { theme, themeChanging } = useTheme();
+  const { themeChanging } = useTheme();
+  const opacity = useThemeSelect({ light: 1, dark: 0 }, { light: 0, dark: 1 });
+  const { text } = useDynamicColors();
 
   return (
     <div>
       <Background themeChanging={themeChanging}>
         <ImageContainer isHidden={isHidden}>
           <Image src={item.image} />
-          <HorizontalImageFadeLight theme={theme} />
-          <VerticalImageFadeLight theme={theme} />
-          <HorizontalImageFadeDark theme={theme} />
-          <VerticalImageFadeDark theme={theme} />
+          <HorizontalImageFadeLight opacity={opacity.light} />
+          <VerticalImageFadeLight opacity={opacity.light} />
+          <HorizontalImageFadeDark opacity={opacity.dark} />
+          <VerticalImageFadeDark opacity={opacity.dark} />
         </ImageContainer>
       </Background>
       <Content isHidden={isHidden}>
-        <Title theme={theme}>{item.title}</Title>
+        <Title color={text}>{item.title}</Title>
         <Spacer size="s" />
-        <Paragraph theme={theme}>{item.content}</Paragraph>
+        <Paragraph color={text}>{item.content}</Paragraph>
       </Content>
     </div>
   );

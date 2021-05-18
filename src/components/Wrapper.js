@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { useTheme } from '../context/theme';
 import { fadeIn } from '../keyframes';
 import { small } from '../styles/breakpoints';
 
@@ -18,14 +17,8 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Wrapper = ({ children }) => {
-  const { theme } = useTheme();
-
-  return (
-    <StyledWrapper id="wrapper" theme={theme}>
-      {children}
-    </StyledWrapper>
-  );
-};
+const Wrapper = ({ children }) => (
+  <StyledWrapper id="wrapper">{children}</StyledWrapper>
+);
 
 export default Wrapper;

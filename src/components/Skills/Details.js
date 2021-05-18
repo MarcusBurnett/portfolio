@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import {
-  Background,
-  BackgroundImage,
-  HorizontalImageFadeLight,
-  VerticalImageFadeLight,
-  VerticalImageFadeDark,
-  HorizontalImageFadeDark,
-} from '../BackgroundImageFade';
-import { useTheme } from '../../context/theme';
+import BackgroundImageFade from '../BackgroundImageFade';
 import skills from '../../data/skills';
 import { fadeInAndSlideLeft, fadeInAndSlideUp } from '../../keyframes';
-import { darkBlue } from '../../styles/colors';
 import Spacer from '../Spacer';
 import CardList from '../CardList';
 import { xsmall } from '../../styles/breakpoints';
+import useDynamicColors from '../../hooks/useDynamicColors';
 
 const Container = styled.div`
   width: 100%;
@@ -33,7 +25,7 @@ const Container = styled.div`
 
 const Title = styled.h3`
   font-size: 2.4rem;
-  color: ${({ theme }) => (theme === 'dark' ? '#FFFFFF' : darkBlue)};
+  color: ${({ color }) => color};
   transition: color 0.4s ease;
 `;
 
@@ -78,7 +70,7 @@ const BackgroundImageContainer = styled.div`
 `;
 
 const Paragraph = styled.p`
-  color: ${({ theme }) => (theme === 'dark' ? '#FFFFFF' : darkBlue)};
+  color: ${({ color }) => color};
   transition: color 0.4s ease;
 `;
 
@@ -103,7 +95,7 @@ const StyledCardList = styled(CardList)`
 const Details = () => {
   const location = useLocation();
   const [skill, setSkill] = useState({});
-  const { theme, themeChanging } = useTheme();
+  const { text } = useDynamicColors();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -117,24 +109,18 @@ const Details = () => {
 
   return (
     <Container>
-      <Background themeChanging={themeChanging}>
-        <BackgroundImageContainer>
-          <BackgroundImage src={skill.image} alt="background" />
-          <VerticalImageFadeLight theme={theme} />
-          <HorizontalImageFadeLight theme={theme} />
-          <VerticalImageFadeDark theme={theme} />
-          <HorizontalImageFadeDark theme={theme} />
-        </BackgroundImageContainer>
-      </Background>
+      <BackgroundImageContainer>
+        <BackgroundImageFade image={skill.image} alt={skill.title} />
+      </BackgroundImageContainer>
       <Content>
         <ExperienceContainer>
-          <Title theme={theme}>My Experience</Title>
+          <Title color={text}>My Experience</Title>
           <Spacer size="s" />
-          <Paragraph theme={theme}>{skill.experience}</Paragraph>
+          <Paragraph color={text}>{skill.experience}</Paragraph>
         </ExperienceContainer>
         <Spacer size="xxxl" />
         <UsedContainer>
-          <Title theme={theme}>Frequently Used</Title>
+          <Title color={text}>Frequently Used</Title>
           <Spacer size="s" />
           <ListContainer>
             <StyledCardList items={skill.used} />
@@ -142,7 +128,7 @@ const Details = () => {
         </UsedContainer>
         <Spacer size="xxxl" />
         <ProjectsContainer>
-          <Title theme={theme}>{skill.title} Projects</Title>
+          <Title color={text}>{skill.title} Projects</Title>
           <Spacer size="s" />
           <ListContainer>
             <StyledCardList items={skill.projects} />

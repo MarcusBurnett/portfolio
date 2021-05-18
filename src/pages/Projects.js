@@ -6,9 +6,8 @@ import projects from '../data/projects';
 import Project from '../components/Projects/Project';
 import AnimatedRoute from '../components/navigation/AnimatedRoute';
 import { small } from '../styles/breakpoints';
-import { midnightBlue } from '../styles/colors';
-import { useTheme } from '../context/theme';
 import List from '../components/Projects/List';
+import useDynamicColors from '../hooks/useDynamicColors';
 
 const Container = styled.div`
   width: 100%;
@@ -16,8 +15,7 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   padding-left: 20px;
-  background-color: ${({ theme }) =>
-    theme === 'dark' ? midnightBlue : '#FFFFFF'};
+  background-color: ${({ backgroundColor }) => backgroundColor};
 
   @media screen and (max-width: ${small}) {
     flex-direction: column;
@@ -55,15 +53,19 @@ const SlideIndicatorContainer = styled.div`
 
 const Projects = () => {
   const { pathname } = useLocation();
-  const { theme } = useTheme();
+  const { page } = useDynamicColors();
   const [listOpen, setListOpen] = useState(false);
 
-  if (pathname === '/projects') {
+  if (
+    pathname === '/projects' ||
+    (pathname.includes('/projects') &&
+      !projects.find((project) => pathname === project.path))
+  ) {
     return <Redirect to="/projects/airtime-rewards" />;
   }
 
   return (
-    <Container theme={theme}>
+    <Container backgroundColor={page}>
       <SlideIndicatorContainer>
         <SlideIndicator slides={projects} openList={() => setListOpen(true)} />
       </SlideIndicatorContainer>

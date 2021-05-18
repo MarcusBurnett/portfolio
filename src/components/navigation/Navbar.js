@@ -2,11 +2,10 @@ import React, { Fragment, useState } from 'react';
 import styled from 'styled-components/macro';
 import DarkModeToggle from '../DarkModeToggle';
 import Spacer from '../Spacer';
-import { darkBlue, blue } from '../../styles/colors';
-import { useTheme } from '../../context/theme';
 import { small, xsmall } from '../../styles/breakpoints';
 import NavbarMobile from './NavbarMobile';
 import Tabs from './Tabs';
+import useDynamicColors from '../../hooks/useDynamicColors';
 
 const StyledNavbar = styled.nav`
   align-self: flex-end;
@@ -24,7 +23,7 @@ const StyledNavbar = styled.nav`
     opacity: ${({ menuOpen }) => (menuOpen ? 1 : 0)};
     transition: transform 0.5s ease, opacity 0.5s 0.2s ease,
       background-color 0.5s ease;
-    background-color: ${({ theme }) => (theme === 'dark' ? darkBlue : blue)};
+    background-color: ${({ backgroundColor }) => backgroundColor};
     justify-content: flex-start;
     position: fixed;
     z-index: 3;
@@ -48,14 +47,14 @@ const StyledSpacer = styled(Spacer)`
 `;
 
 const Navbar = () => {
-  const { theme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { header } = useDynamicColors();
 
   return (
     <>
       <NavbarMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <StyledSpacer size="s" />
-      <StyledNavbar theme={theme} menuOpen={menuOpen}>
+      <StyledNavbar backgroundColor={header} menuOpen={menuOpen}>
         <Tabs setMenuOpen={setMenuOpen} />
         <Spacer size="s" />
         <DarkModeToggle />

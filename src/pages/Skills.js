@@ -47,7 +47,11 @@ const DetailsContainer = styled.div`
 const Skills = () => {
   const { pathname } = useLocation();
 
-  if (pathname === '/skills') {
+  if (
+    pathname === '/skills' ||
+    (pathname.includes('/skills') &&
+      !skills.find((skill) => pathname === skill.path))
+  ) {
     return <Redirect to="/skills/react" />;
   }
 

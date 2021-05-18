@@ -2,19 +2,11 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { contactBackground } from '../assets/images';
 import Spacer from '../components/Spacer';
-import { useTheme } from '../context/theme';
-import { darkBlue } from '../styles/colors';
-import {
-  Background,
-  BackgroundImage,
-  HorizontalImageFadeLight,
-  VerticalImageFadeLight,
-  VerticalImageFadeDark,
-  HorizontalImageFadeDark,
-} from '../components/BackgroundImageFade';
+import BackgroundImageFade from '../components/BackgroundImageFade';
 import { small, xsmall } from '../styles/breakpoints';
 import { fadeInAndSlideLeft, fadeInAndSlideRight } from '../keyframes';
 import ContactForm from '../forms/ContactForm';
+import useDynamicColors from '../hooks/useDynamicColors';
 
 const Container = styled.div`
   display: flex;
@@ -32,7 +24,7 @@ const Container = styled.div`
 
 const Header = styled.h2`
   font-size: 3rem;
-  color: ${({ theme }) => (theme === 'dark' ? '#FFFFFF' : darkBlue)};
+  color: ${({ color }) => color};
   transition: color 0.4s ease;
 
   @media screen and (max-width: ${small}) {
@@ -74,21 +66,15 @@ const Content = styled.div`
 `;
 
 const Contact = () => {
-  const { theme, themeChanging } = useTheme();
+  const { text } = useDynamicColors();
 
   return (
     <Container>
-      <Background themeChanging={themeChanging}>
-        <BackgroundImageContainer>
-          <BackgroundImage src={contactBackground} />
-          <VerticalImageFadeLight theme={theme} />
-          <HorizontalImageFadeLight theme={theme} />
-          <VerticalImageFadeDark theme={theme} />
-          <HorizontalImageFadeDark theme={theme} />
-        </BackgroundImageContainer>
-      </Background>
+      <BackgroundImageContainer>
+        <BackgroundImageFade image={contactBackground} alt="contact" />
+      </BackgroundImageContainer>
       <Content>
-        <Header theme={theme}>Get In Touch</Header>
+        <Header color={text}>Get In Touch</Header>
         <Spacer size="l" />
         <ContactForm />
       </Content>

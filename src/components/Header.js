@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { darkBlue, blue } from '../styles/colors';
 import Spacer from './Spacer';
 import Icons from './Icons';
 import Navbar from './navigation/Navbar';
 import Background from './Background';
 import { small, medium, xsmall } from '../styles/breakpoints';
-import { useThemeSelect } from '../hooks';
 import { fadeInAndSlideUp } from '../keyframes';
+import { useDynamicColors } from '../hooks';
 
 const StyledHeader = styled.div`
   background-color: ${({ backgroundColor }) => backgroundColor};
@@ -92,11 +91,11 @@ const SubTitle = styled.h2`
   }
 `;
 
-const Left = () => {
-  const backgroundColor = useThemeSelect(blue, darkBlue);
+const Header = () => {
+  const { header } = useDynamicColors();
 
   return (
-    <StyledHeader backgroundColor={backgroundColor}>
+    <StyledHeader backgroundColor={header}>
       <Background />
       <Navbar />
       <Container>
@@ -114,4 +113,4 @@ const Left = () => {
   );
 };
 
-export default Left;
+export default Header;

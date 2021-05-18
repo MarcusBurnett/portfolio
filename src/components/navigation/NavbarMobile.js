@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { darkBlue, blue } from '../../styles/colors';
-import { useTheme } from '../../context/theme';
 import { small } from '../../styles/breakpoints';
-import { useScrollPosition, useTabs } from '../../hooks';
+import { useScrollPosition, useTabs, useDynamicColors } from '../../hooks';
 import NavbarMenuIcon from './NavbarMenuIcon';
 
 const StyledNavbarMobile = styled.div`
@@ -20,7 +18,7 @@ const StyledNavbarMobile = styled.div`
     width: 100vw;
     z-index: 3;
     transition: height 0.3s ease, background-color 0.3s ease;
-    background-color: ${({ theme }) => (theme === 'dark' ? darkBlue : blue)};
+    background-color: ${({ backgroundColor }) => backgroundColor};
     box-shadow: 0 1rem 2rem #00000033;
     overflow: hidden;
   }
@@ -48,15 +46,15 @@ const TitleContainer = styled.div`
 `;
 
 const NavbarMobile = ({ menuOpen, setMenuOpen }) => {
-  const { theme } = useTheme();
   const scrollPosition = useScrollPosition();
   const { selectedTab } = useTabs();
+  const { header } = useDynamicColors();
 
   return (
     <StyledNavbarMobile
       scrollPosition={scrollPosition}
       menuOpen={menuOpen}
-      theme={theme}
+      backgroundColor={header}
     >
       <TitleContainer menuOpen={menuOpen}>
         <Icon src={selectedTab.icon} alt={`${selectedTab.title} icon`} />

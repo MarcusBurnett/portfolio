@@ -72,7 +72,7 @@ const DarkModeToggle = () => {
       backgroundColor={backgroundColor}
     >
       <Circle transform={transform} backgroundColor={circleColor}>
-        <Image alt={theme || 'dark'} src={icon} />
+        <Image alt={theme} src={icon} />
       </Circle>
     </StyledDarkModeToggle>
   );

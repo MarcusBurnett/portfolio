@@ -1,10 +1,10 @@
 import React from 'react';
-import styled, { css } from 'styled-components/macro';
-import { useTheme } from '../../context/theme';
+import styled from 'styled-components/macro';
 import { small } from '../../styles/breakpoints';
-import { blue, darkBlue, midnightBlue, red } from '../../styles/colors';
+import { blue, darkBlue, red, lightBlue } from '../../styles/colors';
 import { semiBold } from '../../styles/fonts';
 import Spacer from '../Spacer';
+import { useDynamicColors } from '../../hooks';
 
 const StyledTextarea = styled.div`
   display: flex;
@@ -18,20 +18,15 @@ const TextareaField = styled.textarea`
   padding: 1rem 1rem 0;
   min-height: 4rem;
   border-radius: 0.5rem;
-  border: 0.1rem solid
-    ${({ theme, error }) =>
-      (error && red) || (theme === 'dark' && '#FFFFFF') || blue};
+  border: 0.1rem solid ${({ borderColor }) => borderColor};
   -webkit-appearance: none;
-  color: ${({ theme }) => (theme === 'dark' ? '#ffffff' : darkBlue)};
+  color: ${({ color }) => color};
   transition: border 0.4s ease;
 
   &:focus {
     outline: none;
-    ${({ $showStatus, value }) =>
-      (!$showStatus || !value) &&
-      css`
-        border-color: ${red};
-      `};
+    border-color: ${({ borderColorFocus }) => borderColorFocus};
+    box-shadow: 0 0 0 1px ${({ borderColorFocus }) => borderColorFocus};
   }
 
   @media screen and (max-width: ${small}) {
@@ -48,8 +43,7 @@ const TextareaContainer = styled.div`
 
 const LabelContainer = styled.div`
   position: absolute;
-  background-color: ${({ theme }) =>
-    theme === 'dark' ? midnightBlue : '#ffffff'};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   padding-right: 0.5rem;
   margin-top: 0.5rem;
   font-size: 1.3rem;
@@ -58,8 +52,7 @@ const LabelContainer = styled.div`
 `;
 
 const Label = styled.label`
-  color: ${({ theme, error }) =>
-    (error && red) || (theme === 'dark' && '#FFFFFF') || blue};
+  color: ${({ color, error }) => (error && red) || color};
   font-weight: ${semiBold};
   transition: color 0.4s ease;
 
@@ -74,7 +67,16 @@ const Error = styled.span`
 `;
 
 const Textarea = ({ name, label, onChange, value, error }) => {
-  const { theme } = useTheme();
+  const {
+    text,
+    inputBorder,
+    inputBorderFocus,
+    page,
+    inputLabel,
+  } = useDynamicColors(
+    { inputBorderFocus: darkBlue, inputLabel: blue },
+    { inputBorderFocus: lightBlue, inputLabel: '#FFFFFF' }
+  );
 
   return (
     <StyledTextarea>
@@ -86,14 +88,21 @@ const Textarea = ({ name, label, onChange, value, error }) => {
           value={value}
           onChange={onChange}
           error={error}
-          theme={theme}
           rows={5}
+          borderColor={(error && red) || inputBorder}
+          borderColorFocus={inputBorderFocus}
+          color={text}
         />
       </TextareaContainer>
       <Spacer size="s" />
       <Error error={error}>{error || '-'}</Error>
-      <LabelContainer theme={theme}>
-        <Label error={error} theme={theme} className={label} htmlFor={name}>
+      <LabelContainer backgroundColor={page}>
+        <Label
+          error={error}
+          color={inputLabel}
+          className={label}
+          htmlFor={name}
+        >
           {label}
         </Label>
       </LabelContainer>

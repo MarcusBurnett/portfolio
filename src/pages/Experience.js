@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import Item from '../components/Experience/Item';
-import { useTheme } from '../context/theme';
 import experience from '../data/experience';
-import { midnightBlue } from '../styles/colors';
+import useDynamicColors from '../hooks/useDynamicColors';
 
 const Container = styled.div`
   width: 100%;
   min-height: 100%;
-  background-color: ${({ theme }) =>
-    theme === 'dark' ? midnightBlue : '#FFFFFF'};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,10 +15,10 @@ const Container = styled.div`
 `;
 
 const Experience = () => {
-  const { theme } = useTheme();
+  const { page } = useDynamicColors();
 
   return (
-    <Container theme={theme}>
+    <Container backgroundColor={page}>
       {experience.map((item, i) => (
         <div key={item.title}>
           <Item

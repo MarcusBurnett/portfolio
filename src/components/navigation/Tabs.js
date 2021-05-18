@@ -11,10 +11,10 @@ import {
   darkBlue,
   blue,
 } from '../../styles/colors';
-import { useTheme } from '../../context/theme';
 import { small, xsmall } from '../../styles/breakpoints';
 import { useWindowDimensions, useTabs } from '../../hooks';
 import { fadeInAndSlideRight } from '../../keyframes';
+import useThemeSelect from '../../hooks/useThemeSelect';
 
 const StyledTabs = styled.ul`
   opacity: 0;
@@ -41,10 +41,8 @@ const StyledCard = styled(Card)`
   flex: 1;
 
   .background {
-    border-color: ${({ theme, showBackground }) =>
-      (showBackground && theme === 'dark' && midnightBlueDark) ||
-      (showBackground && greyMedium) ||
-      'transparent'};
+    border-color: ${({ colors, showBackground }) =>
+      (showBackground && colors.backgroundBorder) || 'transparent'};
     border-width: 1px;
     @media screen and (max-width: ${small}) {
       border-width: 0;
@@ -53,11 +51,8 @@ const StyledCard = styled(Card)`
 
   .card {
     display: flex;
-    background-color: ${({ selected, theme }) =>
-      (selected && theme === 'dark' && midnightBlueLight) ||
-      (selected && lightBlue) ||
-      (theme === 'light' && blue) ||
-      darkBlue};
+    background-color: ${({ selected, colors }) =>
+      selected ? colors.card.selected : colors.card.notSelected};
     box-shadow: ${({ selected }) =>
       selected ? '0 1rem 2rem #00000033' : 'none'};
     transition: all 0.4s ease;
@@ -110,9 +105,18 @@ const StyledLink = styled(Link)`
 `;
 
 const Tabs = ({ setMenuOpen }) => {
-  const { theme } = useTheme();
   const { height: windowHeight } = useWindowDimensions();
   const { tabs } = useTabs();
+  const cardColors = useThemeSelect(
+    {
+      backgroundBorder: greyMedium,
+      card: { selected: lightBlue, notSelected: blue },
+    },
+    {
+      backgroundBorder: midnightBlueDark,
+      card: { selected: midnightBlueLight, notSelected: darkBlue },
+    }
+  );
 
   const handleOnClick = () => {
     setMenuOpen(false);
@@ -128,7 +132,7 @@ const Tabs = ({ setMenuOpen }) => {
               showBackground={tab.selected}
               selected={tab.selected}
               backgroundPosition="left"
-              theme={theme}
+              colors={cardColors}
             >
               <StyledLink
                 onClick={handleOnClick}

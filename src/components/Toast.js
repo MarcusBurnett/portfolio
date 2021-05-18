@@ -1,12 +1,11 @@
 import React, { useEffect, useState, memo } from 'react';
 import styled from 'styled-components/macro';
-import { useTheme } from '../context/theme';
 import { useToast } from '../context/toast';
-import { darkBlue, greyLight } from '../styles/colors';
 import Button from './form/Button';
 import Card from './Card';
 import { medium } from '../styles/fonts';
 import Spacer from './Spacer';
+import useDynamicColors from '../hooks/useDynamicColors';
 
 const Container = styled.div`
   position: fixed;
@@ -41,6 +40,10 @@ const StyledCard = styled(Card)`
   justify-content: space-between;
   align-items: flex-end;
 
+  .card {
+    background-color: ${({ backgroundColor }) => backgroundColor};
+  }
+
   @media screen and (min-width: 700px) {
     padding: 1.5rem;
   }
@@ -61,7 +64,7 @@ const Content = styled.div`
 const Toast = () => {
   const { message, hideToast, visible } = useToast();
   const [showToast, setShowToast] = useState(visible);
-  const { theme } = useTheme();
+  const { toast, text } = useDynamicColors();
 
   const onClickOK = () => {
     hideToast();
@@ -80,15 +83,9 @@ const Toast = () => {
 
   return (
     <Container showToast={showToast}>
-      <StyledCard
-        color={(theme === 'dark' && darkBlue) || greyLight}
-        padding="2rem 3rem"
-        position="center"
-      >
+      <StyledCard backgroundColor={toast} padding="2rem 3rem" position="center">
         <Content>
-          <Text color={(theme === 'dark' && '#ffffff') || darkBlue}>
-            {message}
-          </Text>
+          <Text color={text}>{message}</Text>
         </Content>
         <Spacer size="s" />
         <Button small onClick={onClickOK}>

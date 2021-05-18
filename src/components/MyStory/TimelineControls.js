@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { arrowIcon, arrowIconBlue } from '../../assets/images';
-import { darkBlue } from '../../styles/colors';
 import timelineItems from '../../data/timeline';
-import { useTheme } from '../../context/theme';
+import useDynamicColors from '../../hooks/useDynamicColors';
+import useThemeSelect from '../../hooks/useThemeSelect';
 
 const Controls = styled.div`
   display: flex;
@@ -29,7 +29,7 @@ const Arrow = styled.img`
 `;
 
 const CurrentSlide = styled.span`
-  color: ${({ theme }) => (theme === 'dark' ? '#ffffff' : darkBlue)};
+  color: ${({ color }) => color};
   min-width: 5rem;
   text-align: center;
 `;
@@ -39,7 +39,8 @@ const MyStoryTimeline = ({
   currentSlideIndex,
   setCurrentSlideIndex,
 }) => {
-  const { theme } = useTheme();
+  const { text } = useDynamicColors();
+  const arrow = useThemeSelect(arrowIconBlue, arrowIcon);
 
   const handleMoveTimeline = (direction) => {
     setTimelineMoving(true);
@@ -62,7 +63,7 @@ const MyStoryTimeline = ({
           currentSlideIndex > 0 ? () => handleMoveTimeline('back') : undefined
         }
         disabled={currentSlideIndex === 0}
-        src={theme === 'dark' ? arrowIcon : arrowIconBlue}
+        src={arrow}
         side="left"
         onKeyPress={
           currentSlideIndex > 0
@@ -71,7 +72,7 @@ const MyStoryTimeline = ({
         }
         tabIndex={0}
       />
-      <CurrentSlide theme={theme}>
+      <CurrentSlide color={text}>
         {currentSlideIndex + 1} of {timelineItems.length}
       </CurrentSlide>
       <Arrow
@@ -81,7 +82,7 @@ const MyStoryTimeline = ({
             : undefined
         }
         disabled={currentSlideIndex === timelineItems.length - 1}
-        src={theme === 'dark' ? arrowIcon : arrowIconBlue}
+        src={arrow}
         side="right"
         onKeyPress={
           currentSlideIndex < timelineItems.length - 1

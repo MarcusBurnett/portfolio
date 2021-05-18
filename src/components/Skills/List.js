@@ -3,10 +3,11 @@ import styled from 'styled-components/macro';
 import { Link, useLocation } from 'react-router-dom';
 import Spacer from '../Spacer';
 import { developmentSkills, designSkills } from '../../data/skills';
-import { red, greyDark, greyMedium, darkBlue } from '../../styles/colors';
+import { red, greyDark, greyMedium } from '../../styles/colors';
 import { useTheme } from '../../context/theme';
 import { xsmall } from '../../styles/breakpoints';
 import { fadeIn } from '../../keyframes';
+import useDynamicColors from '../../hooks/useDynamicColors';
 
 const StyledList = styled.div`
   padding: 5vh 0 5vh 3vw;
@@ -65,7 +66,7 @@ const Title = styled.h2`
   opacity: ${({ isSelected }) => (isSelected ? 1 : 0)};
   transform: ${({ isSelected }) => isSelected && 'translateX(1rem)'};
   transition: opacity 0.3s ease, transform 0.3s ease;
-  color: ${({ theme }) => (theme === 'dark' ? '#FFFFFF' : darkBlue)};
+  color: ${({ color }) => color};
 
   @media screen and (max-width: ${xsmall}) {
     margin: 10px 0 5px 0;
@@ -96,12 +97,16 @@ const Indicator = styled.div`
 `;
 
 const CategoryTitle = styled.h3`
-  color: ${({ theme }) => (theme === 'dark' ? greyMedium : greyDark)};
+  color: ${({ color }) => color};
 `;
 
 const List = () => {
   const { pathname } = useLocation();
   const { theme } = useTheme();
+  const { text, categoryTitle } = useDynamicColors(
+    { categoryTitle: greyDark },
+    { categoryTitle: greyMedium }
+  );
 
   const renderList = (items) =>
     items.map((item) => {
@@ -113,7 +118,7 @@ const List = () => {
             <Skill key={item.title} isSelected={isSelected}>
               <Indicator isSelected={isSelected} />
               <Icon src={item.logos[theme]} isSelected={isSelected} />
-              <Title theme={theme} isSelected={isSelected}>
+              <Title color={text} isSelected={isSelected}>
                 {item.title}
               </Title>
             </Skill>
@@ -126,13 +131,13 @@ const List = () => {
   return (
     <StyledList>
       <div>
-        <CategoryTitle>DEVELOPMENT</CategoryTitle>
+        <CategoryTitle color={categoryTitle}>DEVELOPMENT</CategoryTitle>
         <Spacer size="s" />
         <ListContainer>{renderList(developmentSkills)}</ListContainer>
       </div>
       <Spacer size="l" />
       <div>
-        <CategoryTitle>DESIGN</CategoryTitle>
+        <CategoryTitle color={categoryTitle}>DESIGN</CategoryTitle>
         <Spacer size="s" />
         <ListContainer>{renderList(designSkills)}</ListContainer>
       </div>

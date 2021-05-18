@@ -1,17 +1,20 @@
+import React from 'react';
 import styled from 'styled-components/macro';
+import { useTheme } from '../context/theme';
+import { useThemeSelect } from '../hooks';
 
-export const Background = styled.div`
+const Background = styled.div`
   opacity: ${({ themeChanging }) => (themeChanging ? 0 : 1)};
   transition: ${({ themeChanging }) =>
     themeChanging ? '' : 'opacity 0.4s ease'};
 `;
 
-export const BackgroundImage = styled.img`
+const BackgroundImage = styled.img`
   max-height: 100%;
   transition: opacity 0.4s ease;
 `;
 
-export const ImageFade = styled.div`
+const ImageFade = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
@@ -20,7 +23,7 @@ export const ImageFade = styled.div`
   transition: opacity 0.4s ease;
 `;
 
-export const HorizontalImageFadeDark = styled(ImageFade)`
+const HorizontalImageFadeDark = styled(ImageFade)`
   background: ${({ side = 'right' }) =>
     side === 'right'
       ? `linear-gradient(
@@ -32,10 +35,10 @@ export const HorizontalImageFadeDark = styled(ImageFade)`
     90deg,
     rgba(26, 27, 41, 0.3) 0%, rgba(26, 27, 41, 1) 100%
   )`};
-  opacity: ${({ theme }) => (theme === 'dark' ? 1 : 0)};
+  opacity: ${({ opacity }) => opacity};
 `;
 
-export const VerticalImageFadeDark = styled(ImageFade)`
+const VerticalImageFadeDark = styled(ImageFade)`
   background: linear-gradient(
     0deg,
     rgba(26, 27, 41, 1) 0%,
@@ -53,10 +56,10 @@ export const VerticalImageFadeDark = styled(ImageFade)`
     rgba(26, 27, 41, 0.3) 0%,
     rgba(26, 27, 41, 1) 100%
   )`};
-  opacity: ${({ theme }) => (theme === 'dark' ? 1 : 0)};
+  opacity: ${({ opacity }) => opacity};
 `;
 
-export const HorizontalImageFadeLight = styled(ImageFade)`
+const HorizontalImageFadeLight = styled(ImageFade)`
   background: ${({ side = 'right' }) =>
     side === 'right'
       ? `linear-gradient(
@@ -69,10 +72,10 @@ export const HorizontalImageFadeLight = styled(ImageFade)`
     rgba(255, 255, 255, 0.3) 0%,
     rgba(255, 255, 255, 1) 100%
   )`};
-  opacity: ${({ theme }) => (theme === 'light' ? 1 : 0)};
+  opacity: ${({ opacity }) => opacity};
 `;
 
-export const VerticalImageFadeLight = styled(ImageFade)`
+const VerticalImageFadeLight = styled(ImageFade)`
   background: ${({ side = 'right' }) =>
     side === 'right'
       ? `linear-gradient(
@@ -85,5 +88,22 @@ export const VerticalImageFadeLight = styled(ImageFade)`
     rgba(255, 255, 255, 0.3) 0%,
     rgba(255, 255, 255, 1) 100%
   )`};
-  opacity: ${({ theme }) => (theme === 'light' ? 1 : 0)};
+  opacity: ${({ opacity }) => opacity};
 `;
+
+const BackgroundImageFade = ({ side, image, alt }) => {
+  const { themeChanging } = useTheme();
+  const opacity = useThemeSelect({ light: 1, dark: 0 }, { light: 0, dark: 1 });
+
+  return (
+    <Background themeChanging={themeChanging}>
+      <BackgroundImage src={image} alt={alt} />
+      <VerticalImageFadeLight opacity={opacity.light} side={side} />
+      <HorizontalImageFadeLight opacity={opacity.light} side={side} />
+      <VerticalImageFadeDark opacity={opacity.dark} side={side} />
+      <HorizontalImageFadeDark opacity={opacity.dark} side={side} />
+    </Background>
+  );
+};
+
+export default BackgroundImageFade;

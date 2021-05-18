@@ -1,5 +1,7 @@
 import {
   blue,
+  darkBlue,
+  greyLight,
   greyMedium,
   midnightBlue,
   midnightBlueDark,
@@ -15,6 +17,8 @@ const useDynamicColors = (light, dark) =>
       border: greyMedium,
       card: blue,
       inputBorder: blue,
+      toast: greyLight,
+      header: blue,
       ...light,
     },
     {
@@ -23,6 +27,8 @@ const useDynamicColors = (light, dark) =>
       border: midnightBlueDark,
       card: midnightBlueLight,
       inputBorder: '#FFFFFF',
+      toast: darkBlue,
+      header: darkBlue,
       ...dark,
     }
   );
