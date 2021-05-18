@@ -66,14 +66,19 @@ const SlideIndicator = ({ slides, openList }) => {
         tabIndex={0}
       />
       <Spacer size="l" />
-      <Link disabled={selectedIndex === 0} to={getNewPath('back')}>
-        <Arrow src={arrowIcon} side="top" />
+      <Link
+        disabled={selectedIndex === 0}
+        to={getNewPath('back')}
+        aria-label="view project"
+      >
+        <Arrow src={arrowIcon} side="top" alt="arrow up" />
       </Link>
       {slides.map((slide, i) => (
         <Link
           key={slide.title}
           disabled={selectedIndex === 0}
           to={slides[i]?.path}
+          aria-label="view project"
         >
           <Indicator
             key={slide.title}
@@ -87,8 +92,9 @@ const SlideIndicator = ({ slides, openList }) => {
       <Link
         disabled={selectedIndex === slides.length - 1}
         to={getNewPath('forward')}
+        aria-label="view project"
       >
-        <Arrow src={arrowIcon} side="bottom" />
+        <Arrow src={arrowIcon} side="bottom" alt="arrow down" />
       </Link>
     </Container>
   );

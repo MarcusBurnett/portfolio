@@ -40,22 +40,31 @@ const Link = styled.a`
 `;
 
 const icons = [
-  { url: 'mailto:m.burnett8@outlook.com', icon: emailIcon },
-  { url: 'tel: +447393862452', icon: phoneIcon },
-  { url: 'https://www.linkedin.com/in/marcus-burnett/', icon: linkedInIcon },
-  { url: 'https://www.github.com/marcusburnett', icon: githubIcon },
+  { url: 'mailto:m.burnett8@outlook.com', icon: emailIcon, name: 'email' },
+  { url: 'tel: +447393862452', icon: phoneIcon, name: 'phone' },
+  {
+    url: 'https://www.linkedin.com/in/marcus-burnett/',
+    icon: linkedInIcon,
+    name: 'linkedIn',
+  },
+  {
+    url: 'https://www.github.com/marcusburnett',
+    icon: githubIcon,
+    name: 'github',
+  },
 ];
 
 const Icons = () => (
   <StyledIcons>
-    {icons.map((social) => (
+    {icons.map((icon) => (
       <Link
-        key={social.url}
+        key={icon.url}
         target="_blank"
         rel="noopener noreferrer"
-        href={social.url}
+        href={icon.url}
+        aria-label={`open link ${icon.url}`}
       >
-        <IconsItem src={social.icon} />
+        <IconsItem src={icon.icon} alt={icon.name} />
       </Link>
     ))}
   </StyledIcons>

@@ -73,6 +73,7 @@ const Links = ({ project }) => (
         >
           <DownloadLinkImage
             src={link.store === 'apple' ? appStoreIcon : googlePlayIcon}
+            alt={link.store}
           />
         </DownloadLink>
       ))}

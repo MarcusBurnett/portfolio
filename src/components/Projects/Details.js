@@ -54,7 +54,7 @@ const StyledCardList = styled(CardList)`
 
 const Details = ({ project }) => (
   <>
-    <Logo src={project.logos?.default} />
+    <Logo src={project.logos?.default} alt={`${project.title} logo`} />
     <Spacer size="xxxl" />
     <DescriptionContainer>
       <p>{project.description}</p>

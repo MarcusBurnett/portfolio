@@ -12,7 +12,7 @@ const List = styled.ul`
   flex: 1;
 `;
 
-const CardContainer = styled.div`
+const CardContainer = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -71,6 +71,7 @@ const CardList = ({
             disabled={!item.path}
             to={item.path || pathname}
             onClick={onClick}
+            aria-label={`View ${item.title}`}
           >
             <StyledCard
               theme={theme}

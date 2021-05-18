@@ -1,7 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
-import Spacer from '../Spacer';
 import Card from '../Card';
 import {
   midnightBlueLight,
@@ -30,6 +29,7 @@ const Tab = styled.li`
   transform: ${({ selected }) =>
     selected ? 'translate(0.5rem)' : 'translate(0)'};
   transition: transform 0.4s ease;
+  margin-bottom: 20px;
 
   @media screen and (max-width: ${small}) {
     width: 100%;
@@ -44,6 +44,7 @@ const StyledCard = styled(Card)`
     border-color: ${({ colors, showBackground }) =>
       (showBackground && colors.backgroundBorder) || 'transparent'};
     border-width: 1px;
+
     @media screen and (max-width: ${small}) {
       border-width: 0;
     }
@@ -126,26 +127,26 @@ const Tabs = ({ setMenuOpen }) => {
   return (
     <StyledTabs>
       {tabs.map((tab) => (
-        <Fragment key={tab.title}>
-          <Tab selected={tab.selected}>
-            <StyledCard
-              showBackground={tab.selected}
+        <Tab key={tab.title} selected={tab.selected}>
+          <StyledCard
+            showBackground={tab.selected}
+            selected={tab.selected}
+            aria-selected={tab.selected}
+            backgroundPosition="left"
+            colors={cardColors}
+            role="tab"
+            tabindex={tab.selected ? 0 : -1}
+          >
+            <StyledLink
+              onClick={handleOnClick}
               selected={tab.selected}
-              backgroundPosition="left"
-              colors={cardColors}
+              to={tab.path}
             >
-              <StyledLink
-                onClick={handleOnClick}
-                selected={tab.selected}
-                to={tab.path}
-              >
-                <Icon src={tab.icon} alt={`${tab.title} icon`} />
-                <span>{tab.title}</span>
-              </StyledLink>
-            </StyledCard>
-          </Tab>
-          <Spacer size="l" />
-        </Fragment>
+              <Icon src={tab.icon} alt={`${tab.title} icon`} />
+              <span>{tab.title}</span>
+            </StyledLink>
+          </StyledCard>
+        </Tab>
       ))}
     </StyledTabs>
   );
