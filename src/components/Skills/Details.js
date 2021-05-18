@@ -48,17 +48,17 @@ const Content = styled.div`
 
 const ExperienceContainer = styled.div`
   opacity: 0;
-  animation: 0.4s ${fadeInAndSlideUp} ease 0.5s forwards;
+  animation: 0.4s ${fadeInAndSlideUp} ease 0.6s forwards;
 `;
 
 const UsedContainer = styled.div`
   opacity: 0;
-  animation: 0.4s ${fadeInAndSlideUp} ease 0.6s forwards;
+  animation: 0.4s ${fadeInAndSlideUp} ease 0.7s forwards;
 `;
 
 const ProjectsContainer = styled.div`
   opacity: 0;
-  animation: 0.4s ${fadeInAndSlideUp} ease 0.7s forwards;
+  animation: 0.4s ${fadeInAndSlideUp} ease 0.8s forwards;
 `;
 
 const BackgroundImageContainer = styled.div`
@@ -66,12 +66,12 @@ const BackgroundImageContainer = styled.div`
   right: 0;
   top: 0;
   opacity: 0;
-  animation: 0.8s ${fadeInAndSlideLeft} ease 0.6s forwards;
+  animation: 0.8s ${fadeInAndSlideLeft} ease 0.7s forwards;
 `;
 
 const Paragraph = styled.p`
   color: ${({ color }) => color};
-  transition: color 0.4s ease;
+  transition: color 0.5s ease;
 `;
 
 const StyledCardList = styled(CardList)`

@@ -23,22 +23,31 @@ const Header = styled.h2`
   color: ${({ color }) => color};
   transition: color 0.4s ease;
 `;
+
 const SubHeader = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
 `;
+
 const LocationIcon = styled.img`
   margin: ${({ side }) => (side === 'right' ? '0 0 0 1rem' : '0 1rem 0 0')};
 `;
+
 const Location = styled.span`
   color: ${({ color }) => color};
+
   transition: color 0.4s ease;
 `;
+
 const DateRange = styled.span`
+  flex: 1;
+  text-align: ${({ side }) => (side === 'right' ? 'left' : 'right')};
+
   color: ${({ color }) => color};
   transition: color 0.4s ease;
 `;
+
 const Description = styled.p`
   text-align: ${({ side }) => side};
   color: ${({ color }) => color};
@@ -82,12 +91,15 @@ const Content = styled.div`
   @media screen and (max-width: ${small}) {
     margin: 0;
     padding: 100px 5vw 50px 5vw;
-    align-items: flex-start;
   }
 `;
 
 const LocationContainer = styled.div`
   display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: ${({ side }) =>
+    side === 'left' ? 'flex-start' : 'flex-end'};
 `;
 
 const Item = ({ item, side, minHeight }) => {
@@ -109,16 +121,20 @@ const Item = ({ item, side, minHeight }) => {
         <SubHeader>
           {side === 'left' ? (
             <>
-              <LocationContainer>
+              <LocationContainer side={side}>
                 <LocationIcon side={side} src={locationIcon} />
                 <Location color={text}>{item.location}</Location>
               </LocationContainer>
-              <DateRange color={text}>{item.dateRange}</DateRange>
+              <DateRange side={side} color={text}>
+                {item.dateRange}
+              </DateRange>
             </>
           ) : (
             <>
-              <DateRange color={text}>{item.dateRange}</DateRange>
-              <LocationContainer>
+              <DateRange side={side} color={text}>
+                {item.dateRange}
+              </DateRange>
+              <LocationContainer side={side}>
                 <Location color={text}>{item.location}</Location>
                 <LocationIcon side={side} src={locationIcon} />
               </LocationContainer>

@@ -30,6 +30,7 @@ const Tab = styled.li`
     selected ? 'translate(0.5rem)' : 'translate(0)'};
   transition: transform 0.4s ease;
   margin-bottom: 20px;
+  margin-right: 1px;
 
   @media screen and (max-width: ${small}) {
     width: 100%;
