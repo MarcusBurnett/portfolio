@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { contactBackground } from '../assets/images';
 import Spacer from '../components/Spacer';
 import BackgroundImageFade from '../components/BackgroundImageFade';
-import { small, xsmall } from '../styles/breakpoints';
+import { large, medium, small, xsmall } from '../styles/breakpoints';
 import { fadeInAndSlideLeft, fadeInAndSlideRight } from '../keyframes';
 import ContactForm from '../forms/ContactForm';
 import useDynamicColors from '../hooks/useDynamicColors';
@@ -19,6 +19,11 @@ const Container = styled.div`
   @media screen and (max-width: ${xsmall}) {
     padding-bottom: 0;
     align-items: center;
+  }
+
+  @media screen and (min-width: ${large}) and (min-height: ${medium}) {
+    min-height: 1000px;
+    max-height: 1200px;
   }
 `;
 

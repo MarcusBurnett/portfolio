@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useLocation } from 'react-router-dom';
 import Spacer from '../components/Spacer';
 import Input from '../components/form/Input';
 import { useToast } from '../context/toast';
@@ -28,6 +29,7 @@ const ContactForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const recaptchaRef = useRef();
   const { showSuccessToast, showErrorToast } = useToast();
+  const { state } = useLocation();
 
   const sendEmail = async (values, { resetForm }) => {
     try {
@@ -66,7 +68,7 @@ const ContactForm = () => {
     handleBlur,
     isValid,
   } = useFormik({
-    initialValues: { name: '', email: '', message: '' },
+    initialValues: { name: '', email: '', message: state?.message || '' },
     initialErrors: { error: 'invalid' },
     onSubmit: sendEmail,
     validationSchema: schema,

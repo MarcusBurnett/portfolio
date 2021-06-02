@@ -43,7 +43,7 @@ const Skill = styled.li`
 
   @media screen and (max-width: ${xsmall}) {
     flex-direction: column;
-    min-width: 21vw;
+    min-width: 25vw;
     height: auto;
   }
 `;

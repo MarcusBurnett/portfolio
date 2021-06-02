@@ -121,8 +121,10 @@ const Tabs = ({ setMenuOpen }) => {
   );
 
   const handleOnClick = () => {
-    setMenuOpen(false);
-    window.scrollTo(0, windowHeight);
+    setTimeout(() => {
+      setMenuOpen(false);
+      window.scrollTo(0, windowHeight);
+    }, 700);
   };
 
   return (

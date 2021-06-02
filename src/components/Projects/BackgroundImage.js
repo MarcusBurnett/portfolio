@@ -7,6 +7,7 @@ const BackgroundImageContainer = styled.div`
   right: 0;
   top: 0;
   max-height: 60%;
+  max-width: 50%;
   overflow: hidden;
   opacity: 0;
   animation: 1s ${fadeInAndSlideLeft} ease 0.5s forwards;
@@ -52,8 +53,12 @@ const VerticalImageFade = styled(ImageFade)`
 const ProjectBackgroundImage = ({ project }) => (
   <BackgroundImageContainer>
     <BackgroundImage src={project.backgroundImage} alt="background" />
-    <VerticalImageFade rgb={project.colors?.rgb} />
-    <HorizontalImageFade rgb={project.colors?.rgb} />
+    {project.colors?.rgb && (
+      <>
+        <VerticalImageFade rgb={project.colors?.rgb} />
+        <HorizontalImageFade rgb={project.colors?.rgb} />
+      </>
+    )}
   </BackgroundImageContainer>
 );
 

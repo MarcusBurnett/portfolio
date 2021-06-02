@@ -17,18 +17,18 @@ const StyledButton = styled.button`
   transition: all 0.3s ease;
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
-  border: ${red};
   background-color: ${red};
   font-size: 1.4rem;
+  border: ${red};
 
   &:hover {
     background-color: ${({ hoverBackgroundColor }) => hoverBackgroundColor};
-    border: 0.1rem solid ${red}CC;
+    box-shadow: 0 0 0 1px ${red}CC;
   }
 
   &:focus {
     outline: none;
-    border: 0.1rem solid ${({ focusBorderColor }) => focusBorderColor};
+    box-shadow: 0 0 0 1px ${({ focusBorderColor }) => focusBorderColor};
   }
 
   @media screen and (max-width: ${smallBreakpoint}) {
@@ -45,8 +45,8 @@ const Button = ({
   type = 'button',
   small,
 }) => {
-  const hoverBackgroundColor = useThemeSelect(`${red}CC`, `${blue}CC`);
-  const focusBorderColor = useThemeSelect('#FFFFFF', darkBlue);
+  const hoverBackgroundColor = useThemeSelect(`${blue}CC`, `${red}CC`);
+  const focusBorderColor = useThemeSelect(darkBlue, '#FFFFFF');
 
   return (
     <StyledButton

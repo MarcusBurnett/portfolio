@@ -11,12 +11,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 5vh 3vw;
+  padding: 3vh 3vw;
   overflow: hidden;
 
   @media screen and (max-width: ${small}) {
     min-height: 100vh;
-    padding: 90px 20px 20px;
+    padding: 90px 20px 40px;
   }
 `;
 

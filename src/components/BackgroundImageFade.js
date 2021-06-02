@@ -6,7 +6,7 @@ import { useThemeSelect } from '../hooks';
 const Background = styled.div`
   opacity: ${({ themeChanging }) => (themeChanging ? 0 : 1)};
   transition: ${({ themeChanging }) =>
-    themeChanging ? '' : 'opacity 0.4s ease'};
+    themeChanging ? '' : 'opacity 0.5s ease'};
 `;
 
 const BackgroundImage = styled.img`

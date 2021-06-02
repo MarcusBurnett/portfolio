@@ -5,14 +5,22 @@ import List from '../components/Skills/List';
 import Details from '../components/Skills/Details';
 import skills from '../data/skills';
 import AnimatedRoute from '../components/navigation/AnimatedRoute';
-import { xsmall } from '../styles/breakpoints';
+import { large, xsmall } from '../styles/breakpoints';
+import BackgroundImageFade from '../components/BackgroundImageFade';
+import { fadeInAndSlideLeft } from '../keyframes';
+import { skillsBackground } from '../assets/images';
 
 const Container = styled.div`
   width: 100%;
   min-height: 100%;
+  max-height: 600px;
   display: flex;
   flex: 1;
   overflow: hidden;
+
+  @media screen and (max-width: ${large}) {
+    max-height: unset;
+  }
 
   @media screen and (max-width: ${xsmall}) {
     padding-top: 90px;
@@ -30,6 +38,7 @@ const ListContainer = styled.div`
     overflow: scroll;
     margin-bottom: 30px;
     padding: 10px;
+    min-height: 17rem;
   }
 `;
 
@@ -38,10 +47,19 @@ const DetailsContainer = styled.div`
   height: 100%;
   width: 70%;
   position: relative;
+  min-height: 100vh;
 
   @media screen and (max-width: ${xsmall}) {
     width: 100%;
   }
+`;
+
+const BackgroundImageContainer = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  animation: 0.8s ${fadeInAndSlideLeft} ease 0.7s forwards;
 `;
 
 const Skills = () => {
@@ -61,6 +79,12 @@ const Skills = () => {
         <List />
       </ListContainer>
       <DetailsContainer>
+        <BackgroundImageContainer>
+          <BackgroundImageFade
+            image={skillsBackground}
+            alt="skills background"
+          />
+        </BackgroundImageContainer>
         {skills.map((skill) => (
           <Fragment key={skill.title}>
             <AnimatedRoute path={skill.path} Component={Details} />

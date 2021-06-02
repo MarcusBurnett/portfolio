@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 import projects from '../../data/projects';
 import { fadeInAndSlideUp } from '../../keyframes';
 import Spacer from '../Spacer';
-import { large, xsmall, small } from '../../styles/breakpoints';
+import { xlarge, xsmall, small } from '../../styles/breakpoints';
 import BackgroundImage from './BackgroundImage';
 import Details from './Details';
 import Links from './Links';
@@ -30,7 +30,6 @@ const Container = styled.div`
     width: 100vw;
     margin-left: 0;
     padding-left: 0;
-    margin-top: -90px;
   }
 `;
 
@@ -38,38 +37,47 @@ const ContentContainer = styled.div`
   position: relative;
   padding: 5vh 3vw 5vh 1rem;
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 
-  @media screen and (max-width: ${large}) {
+  @media screen and (max-width: ${xlarge}) {
     flex-direction: column;
     padding: 20px;
+    margin-top: 70px;
   }
 `;
 
 const Content = styled.div`
-  width: 50%;
-  margin-right: 10%;
+  margin-right: 40px;
+  width: calc(50% - 40px);
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-  @media screen and (max-width: ${large}) {
+  @media screen and (max-width: ${xlarge}) {
+    margin-right: 0;
     width: 100%;
-    order: 2;
+    min-width: unset;
   }
 `;
 
 const Image = styled.img`
-  max-width: 45%;
-  align-self: flex-end;
+  min-width: 300px;
+  max-width: 500px;
+  width: 40%;
+  align-self: center;
   opacity: 0;
+  margin-top: 10%;
   animation: 0.8s ${fadeInAndSlideUp} ease 0.8s forwards;
 
-  @media screen and (max-width: ${large}) {
-    max-width: 300px;
-    order: 1;
-    margin: 20px 0 -50px;
+  @media screen and (max-width: ${xlarge}) {
+    align-self: flex-start;
   }
 
   @media screen and (max-width: ${xsmall}) {
-    max-width: 80%;
-    margin: 190px 0 30px;
+    margin: 60px 0 30px;
+    align-self: center;
   }
 `;
 
@@ -91,7 +99,7 @@ const Project = () => {
       <ContentContainer>
         <Content>
           <Details project={project} />
-          <Spacer size="xxxl" />
+          <Spacer size="xl" />
           <Links project={project} />
         </Content>
         <Image src={project.image} alt={project.title} />

@@ -25,7 +25,7 @@ const Indicator = styled.div`
   height: 0.8rem;
   border-radius: 50%;
   background-color: #ffffff;
-  opacity: ${({ distanceFromSelected }) => 1 - distanceFromSelected * 0.2};
+  opacity: ${({ selected }) => (selected ? 1 : 0.4)};
   margin: 0.5rem 0;
 `;
 
@@ -80,13 +80,7 @@ const SlideIndicator = ({ slides, openList }) => {
           to={slides[i]?.path}
           aria-label="view project"
         >
-          <Indicator
-            key={slide.title}
-            distanceFromSelected={
-              selectedIndex > i ? selectedIndex - i : i - selectedIndex
-            }
-            selected={i === selectedIndex}
-          />
+          <Indicator key={slide.title} selected={i === selectedIndex} />
         </Link>
       ))}
       <Link

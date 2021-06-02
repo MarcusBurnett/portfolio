@@ -1,11 +1,10 @@
 import {
-  reactBackground,
   reactIcon,
   sketchIcon,
   reactNativeIcon,
   firebaseIcon,
   reduxIcon,
-  sentryIcon,
+  javascript,
   gitIcon,
   adobeXdIcon,
   overflowIcon,
@@ -20,19 +19,20 @@ export const developmentSkills = [
   {
     title: 'React',
     experience:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo nulla. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis.',
+      'I use React for the majority of my web-based applications and am a big fan of the componentisation. While working at Airtime Rewards, I gained plenty of experience with this library, as well as a number of key packages, such as React Router, Styled Components and Testing Library/React.',
     used: tools.filter((tool) =>
       [
         'React Router',
         'Styled Components',
-        'React Testing Library',
+        'Testing Library/React',
+        'Prop Types',
         'Formik',
         'Axios',
         'ESLint',
+        'Sentry',
       ].includes(tool.title)
     ),
     projects: projects.filter((project) => project.skills?.includes('React')),
-    image: reactBackground,
     logos: { light: reactIconDark, dark: reactIcon },
     path: '/skills/react',
     category: 'dev',
@@ -40,20 +40,20 @@ export const developmentSkills = [
   {
     title: 'React Native',
     experience:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo nulla. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis.',
+      'For mobile applications, React Native is my library of choice. This maintains a level of consistency with web apps I work on, allowing me to transfer knowledge between web and mobile, and continue with componentisation.',
     used: tools.filter((tool) =>
       [
         'React Navigation',
         'React Native Firebase',
-        'React Native Testing Library',
+        'Testing Library/React Native',
         'Formik',
         'Axios',
+        'Sentry',
       ].includes(tool.title)
     ),
     projects: projects.filter((project) =>
       project.skills?.includes('React Native')
     ),
-    image: reactBackground,
     logos: { light: reactNativeIconDark, dark: reactNativeIcon },
     path: '/skills/react-native',
     category: 'dev',
@@ -61,69 +61,61 @@ export const developmentSkills = [
   {
     title: 'Redux',
     experience:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo nulla. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis.',
+      'Though I also enjoy using React Context for state management, I have mostly used Redux on the majority of my projects at work. We initally preferred the use of separate folders for actions, types and reducers,  but recently moved over to ducks. Most of my experience involves hooks rather than the connect methods.',
     used: tools.filter((tool) =>
-      ['React Redux', 'Redux Ducks', 'Redux Thunk'].includes(tool.title)
+      ['React Redux', 'Redux Ducks', 'Redux Hooks', 'Redux Thunk'].includes(
+        tool.title
+      )
     ),
     projects: projects.filter((project) => project.skills?.includes('Redux')),
-    image: reactBackground,
     logos: { light: reduxIcon, dark: reduxIcon },
     path: '/skills/redux',
     category: 'dev',
   },
   {
+    title: 'Javascript',
+    experience:
+      'As a React-centric developer, Javascript is the language upon which it is all built. I have some experience building vanilla javascript projects, but prefer to use React where possible, provided it is also the best option. Have also recently started looking into Typescript.',
+    used: tools.filter((tool) =>
+      ['Lodash', 'Date FNS', 'Cloudinary'].includes(tool.title)
+    ),
+    projects: projects.filter((project) =>
+      project.skills?.includes('Javascript')
+    ),
+    logos: { light: javascript, dark: javascript },
+    path: '/skills/javascript',
+    category: 'dev',
+  },
+  {
     title: 'Firebase',
     experience:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo nulla. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis.',
+      'Firebase is a simple platform to get started with, which is what attracted me at first. I now use it in almost all personal projects to set up authentication, database and storage. I also have experience with Google Cloud Functions via Node.js, take advantage of app distribution for testing and cloud messaging for push notifications.',
     used: tools.filter((tool) =>
       [
-        'Authentication',
-        'Firestore',
-        'Hosting',
-        'Storage',
-        'Cloud Functions',
-        'App Distribution',
-        'Cloud Messaging',
+        'React Native Firebase',
+        'Firebase Authentication',
+        'Firebase Firestore',
+        'Firebase Hosting',
+        'Firebase Storage',
+        'Firebase Cloud Functions',
+        'Firebase Cloud Messaging',
       ].includes(tool.title)
     ),
     projects: projects.filter((project) =>
       project.skills?.includes('Firebase')
     ),
-    image: reactBackground,
     logos: { light: firebaseIcon, dark: firebaseIcon },
     path: '/skills/firebase',
     category: 'dev',
   },
   {
-    title: 'Sentry',
-    experience:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo nulla. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis.',
-    used: tools.filter((tool) =>
-      ['React Redux', 'Redux Ducks', 'Redux Thunk'].includes(tool.title)
-    ),
-    projects: projects.filter((project) => project.skills?.includes('Sentry')),
-    image: reactBackground,
-    logos: { light: sentryIcon, dark: sentryIcon },
-    path: '/skills/sentry',
-    category: 'dev',
-  },
-  {
     title: 'Git',
     experience:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo nulla. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis.',
+      'A required skill for any developer, git makes collaboration between devs much easier, and version history can be a life saver at times. I have experience with Github, Bitbucket and more recently, Gitlab.',
     used: tools.filter((tool) =>
-      [
-        'Authentication',
-        'Firestore',
-        'Hosting',
-        'Storage',
-        'Cloud Functions',
-        'App Distribution',
-        'Cloud Messaging',
-      ].includes(tool.title)
+      ['Github', 'Bitbucket', 'Gitlab'].includes(tool.title)
     ),
     projects: projects.filter((project) => project.skills?.includes('Git')),
-    image: reactBackground,
     logos: { light: gitIcon, dark: gitIcon },
     path: '/skills/git',
     category: 'dev',
@@ -134,12 +126,11 @@ export const designSkills = [
   {
     title: 'Sketch',
     experience:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo nulla. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis.',
+      'Most of my design experience has come with Sketch. At Airtime, I was largely responsible for our design process. I helped move the company on to Sketch Cloud, built a variety of component libraries and implemented a new system based on git, with a master file that mirrored the live app and then each new feature had its own project, which would then be merged upon release.',
     used: tools.filter((tool) =>
-      ['Sketch Cloud', 'Craft'].includes(tool.title)
+      ['Sketch Cloud', 'Craft', 'Iconly', 'Angle'].includes(tool.title)
     ),
     projects: projects.filter((project) => project.skills?.includes('Sketch')),
-    image: reactBackground,
     logos: { light: sketchIcon, dark: sketchIcon },
     path: '/skills/sketch',
     category: 'design',
@@ -147,12 +138,13 @@ export const designSkills = [
   {
     title: 'Adobe XD',
     experience:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo nulla. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis.',
-    used: tools.filter((tool) => ['Angle'].includes(tool.title)),
+      'My preferred design tool, Adobe XD is fast, fluid and easy to use, not only allowing a user to design screens, but also create realistic, animated prototypes. Though I do have more experience with Sketch thanks to my role at Airtime Rewards, I always prefer XD for personal projects.',
+    used: tools.filter((tool) =>
+      ['Angle', 'UI Faces', 'unDraw', 'Stark'].includes(tool.title)
+    ),
     projects: projects.filter((project) =>
       project.skills?.includes('Adobe XD')
     ),
-    image: reactBackground,
     logos: { light: adobeXdIcon, dark: adobeXdIcon },
     path: '/skills/adobe-xd',
     category: 'design',
@@ -160,12 +152,13 @@ export const designSkills = [
   {
     title: 'InVision',
     experience:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo nulla. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis.',
-    used: tools.filter((tool) => ['Sketch'].includes(tool.title)),
-    projects: projects.filter((project) =>
-      project.skills?.includes('Invision')
+      "Adobe XD's prototyping and sharing has made inVision less relevant for me. However, I have plenty of experience with it as a prototyping tool. Most recently, inVision allowed me to access O2's DSM so that I could collaborate with them on the new My O2 app.",
+    used: tools.filter((tool) =>
+      ['Sketch', 'Craft', 'inVision DSM'].includes(tool.title)
     ),
-    image: reactBackground,
+    projects: projects.filter((project) =>
+      project.skills?.includes('inVision')
+    ),
     logos: { light: invisionIcon, dark: invisionIcon },
     path: '/skills/invision',
     category: 'design',
@@ -173,14 +166,11 @@ export const designSkills = [
   {
     title: 'Overflow',
     experience:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique sollicitudin nibh sit amet commodo nulla. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis.',
-    used: tools.filter((tool) =>
-      ['Angle', 'Sketch', 'Adobe XD'].includes(tool.title)
-    ),
+      'When UX becomes complicated, there is no better tool than Overflow for collaborating and ensuring you come up with the best user experience. This is particularly important when collaborating with external companies, as it allows them to get a good feel for the flow of the app.',
+    used: tools.filter((tool) => ['Sketch', 'Adobe XD'].includes(tool.title)),
     projects: projects.filter((project) =>
       project.skills?.includes('Overflow')
     ),
-    image: reactBackground,
     logos: { light: overflowIcon, dark: overflowIcon },
     path: '/skills/overflow',
     category: 'design',

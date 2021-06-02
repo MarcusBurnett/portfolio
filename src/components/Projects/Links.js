@@ -1,15 +1,18 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { useHistory } from 'react-router-dom';
 import { appStoreIcon, googlePlayIcon } from '../../assets/images';
 import { fadeInAndSlideUp } from '../../keyframes';
 import Spacer from '../Spacer';
 import { medium } from '../../styles/fonts';
 import { xsmall } from '../../styles/breakpoints';
-import { red } from '../../styles/colors';
+import { darkBlue, red } from '../../styles/colors';
+import Button from '../form/Button';
 
 const LinksContainer = styled.div`
   opacity: 0;
   animation: 0.4s ${fadeInAndSlideUp} ease 1s forwards;
+  position: relative;
 
   @media screen and (max-width: ${xsmall}) {
     display: flex;
@@ -43,6 +46,7 @@ const Website = styled.a`
   font-size: 2rem;
   font-weight: ${medium};
   text-decoration: none;
+  color: ${({ theme }) => (theme === 'light' ? darkBlue : '#FFFFFF')};
 
   &:hover {
     color: ${red};
@@ -53,32 +57,57 @@ const Website = styled.a`
   }
 `;
 
-const Links = ({ project }) => (
-  <LinksContainer>
-    {project.website && (
-      <Website target="_blank" rel="noopener noreferrer" href={project.website}>
-        {project.website}
-      </Website>
-    )}
-    {project.website && project.downloadLinks.length > 0 && (
-      <Spacer size="xxxl" />
-    )}
-    <div>
-      {project.downloadLinks?.map((link) => (
-        <DownloadLink
+const Links = ({ project }) => {
+  const { push } = useHistory();
+
+  return (
+    <LinksContainer>
+      {project.website && (
+        <Website
           target="_blank"
           rel="noopener noreferrer"
-          key={link.store}
-          href={link.url}
+          href={project.website}
+          theme={project.theme}
         >
-          <DownloadLinkImage
-            src={link.store === 'apple' ? appStoreIcon : googlePlayIcon}
-            alt={link.store}
-          />
-        </DownloadLink>
-      ))}
-    </div>
-  </LinksContainer>
-);
+          {project.website}
+        </Website>
+      )}
+      {project.website && project.downloadLinks.length > 0 && (
+        <Spacer size="xl" />
+      )}
+      <div>
+        {project.downloadLinks?.map((link) => (
+          <DownloadLink
+            target="_blank"
+            rel="noopener noreferrer"
+            key={link.store}
+            href={link.url}
+          >
+            <DownloadLinkImage
+              src={link.store === 'apple' ? appStoreIcon : googlePlayIcon}
+              alt={link.store}
+            />
+          </DownloadLink>
+        ))}
+      </div>
+      {project.contact && (
+        <>
+          <Spacer size="l" />
+          <Button
+            small
+            secondary
+            onClick={() =>
+              push('/contact', {
+                message: `I would like to request a demo of ${project.title}`,
+              })
+            }
+          >
+            {project.contact}
+          </Button>
+        </>
+      )}
+    </LinksContainer>
+  );
+};
 
 export default Links;

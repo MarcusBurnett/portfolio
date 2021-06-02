@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import BackgroundImageFade from '../BackgroundImageFade';
 import skills from '../../data/skills';
-import { fadeInAndSlideLeft, fadeInAndSlideUp } from '../../keyframes';
+import { fadeInAndSlideUp } from '../../keyframes';
 import Spacer from '../Spacer';
 import CardList from '../CardList';
-import { xsmall } from '../../styles/breakpoints';
+import { large, medium, xsmall } from '../../styles/breakpoints';
 import useDynamicColors from '../../hooks/useDynamicColors';
 
 const Container = styled.div`
@@ -21,6 +20,11 @@ const Container = styled.div`
     justify-content: flex-start;
     min-height: unset;
   }
+
+  @media screen and (min-width: ${large}) and (min-height: ${medium}) {
+    min-height: 800px;
+    max-height: 1000px;
+  }
 `;
 
 const Title = styled.h3`
@@ -34,7 +38,7 @@ const ListContainer = styled.div`
   flex-wrap: wrap;
   margin-left: -1rem;
   opacity: 0;
-  animation: 0.8s ${fadeInAndSlideUp} ease 0.7s forwards;
+  animation: 0.8s ${fadeInAndSlideUp} ease 0.5s forwards;
 `;
 
 const Content = styled.div`
@@ -53,20 +57,12 @@ const ExperienceContainer = styled.div`
 
 const UsedContainer = styled.div`
   opacity: 0;
-  animation: 0.4s ${fadeInAndSlideUp} ease 0.7s forwards;
+  animation: 0.4s ${fadeInAndSlideUp} ease 0.3s forwards;
 `;
 
 const ProjectsContainer = styled.div`
   opacity: 0;
-  animation: 0.4s ${fadeInAndSlideUp} ease 0.8s forwards;
-`;
-
-const BackgroundImageContainer = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  opacity: 0;
-  animation: 0.8s ${fadeInAndSlideLeft} ease 0.7s forwards;
+  animation: 0.4s ${fadeInAndSlideUp} ease 0.4s forwards;
 `;
 
 const Paragraph = styled.p`
@@ -109,32 +105,37 @@ const Details = () => {
 
   return (
     <Container>
-      <BackgroundImageContainer>
-        <BackgroundImageFade image={skill.image} alt={skill.title} />
-      </BackgroundImageContainer>
       <Content>
         <ExperienceContainer>
           <Title color={text}>My Experience</Title>
           <Spacer size="s" />
           <Paragraph color={text}>{skill.experience}</Paragraph>
         </ExperienceContainer>
-        <Spacer size="xxxl" />
-        <UsedContainer>
-          <Title color={text}>Frequently Used</Title>
-          <Spacer size="s" />
-          <ListContainer>
-            <StyledCardList items={skill.used} />
-          </ListContainer>
-        </UsedContainer>
-        <Spacer size="xxxl" />
-        <ProjectsContainer>
-          <Title color={text}>{skill.title} Projects</Title>
-          <Spacer size="s" />
-          <ListContainer>
-            <StyledCardList items={skill.projects} />
-          </ListContainer>
-        </ProjectsContainer>
-        <Spacer size="xxxl" />
+        {skill.used?.length > 0 && (
+          <>
+            <Spacer size="xxxl" />
+            <UsedContainer>
+              <Title color={text}>Frequently Used</Title>
+              <Spacer size="s" />
+              <ListContainer>
+                <StyledCardList items={skill.used} />
+              </ListContainer>
+            </UsedContainer>
+          </>
+        )}
+        {skill.projects?.length > 0 && (
+          <>
+            <Spacer size="xxxl" />
+            <ProjectsContainer>
+              <Title color={text}>{skill.title} Projects</Title>
+              <Spacer size="s" />
+              <ListContainer>
+                <StyledCardList items={skill.projects} />
+              </ListContainer>
+            </ProjectsContainer>
+          </>
+        )}
+        <Spacer size="s" />
       </Content>
     </Container>
   );

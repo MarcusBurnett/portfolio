@@ -53,6 +53,11 @@ const StyledCard = styled(Card)`
   }
 `;
 
+const Image = styled.img`
+  max-width: 90%;
+  max-height: 90%;
+`;
+
 const CardList = ({
   items = [],
   backgroundColor,
@@ -83,7 +88,7 @@ const CardList = ({
               }
               borderColor={borderColor}
             >
-              <img src={item.logos?.[theme]} alt={item.title} />
+              <Image src={item.logos?.[theme]} alt={item.title} />
             </StyledCard>
           </Link>
           <ToolTip className="tooltip">{item.title}</ToolTip>

@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
-import { small } from '../../styles/breakpoints';
 import { formatDuration } from '../../utilities';
+import { xsmall } from '../../styles/breakpoints';
 
 const Text = styled.span`
-  @media screen and (max-width: ${small}) {
-    font-size: 2rem;
+  font-size: 2rem;
+
+  @media screen and (max-width: ${xsmall}) {
+    font-size: 2.6rem;
   }
 `;
 
 const Letter = styled(Text)`
-  width: 0.9rem;
+  width: 1rem;
   display: flex;
   justify-content: center;
 
-  @media screen and (max-width: ${small}) {
-    width: 1.1rem;
+  @media screen and (max-width: ${xsmall}) {
+    width: 1.4rem;
   }
 `;
 

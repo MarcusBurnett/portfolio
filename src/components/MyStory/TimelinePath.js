@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components/macro';
 import { red } from '../../styles/colors';
 import Spacer from '../Spacer';
-import { small } from '../../styles/breakpoints';
+import { small, medium } from '../../styles/breakpoints';
 import useDynamicColors from '../../hooks/useDynamicColors';
 
 const Line = styled.div`
@@ -56,16 +56,16 @@ const StyledTimelinePath = styled.div`
   display: flex;
   align-items: center;
   transform: rotateY(40deg) rotateX(70deg) rotateZ(-20deg)
-    ${({ currentIndex }) => `translateX(-${currentIndex * 672}px)`};
+    ${({ currentIndex }) => `translateX(-${currentIndex * 671 + 2}px)`};
   position: absolute;
-  bottom: -90px;
+  bottom: -80px;
   left: -225px;
   transform-origin: bottom left;
   transition: all 1s ease;
 
   @media screen and (max-width: ${small}) {
     transform: scale(0.8) rotateY(40deg) rotateX(70deg) rotateZ(-20deg)
-      ${({ currentIndex }) => `translateX(-${currentIndex * 672}px)`};
+      ${({ currentIndex }) => `translateX(-${currentIndex * 671 + 2}px)`};
     left: -175px;
     bottom: -60px;
   }
@@ -77,7 +77,7 @@ const VerticalLine = styled.div`
   background-position: center;
   background-size: 5px 8px;
   background-repeat: repeat-y;
-  height: calc(100% - 50px);
+  height: calc(100% - 60px);
   transform: ${({ isHidden }) => (isHidden ? 'scaleY(0)' : 'scaleY(1)')};
   transform-origin: bottom;
   transition: transform 0.5s ease;
@@ -104,6 +104,10 @@ const LineContainer = styled.div`
   align-items: center;
   padding-top: calc(10vh + 1.3rem);
 
+  @media screen and (max-width: ${medium}) {
+    padding-top: calc(30px + 1.3rem);
+  }
+
   @media screen and (max-width: ${small}) {
     padding-top: calc(120px + 1.3rem);
   }
@@ -112,13 +116,14 @@ const LineContainer = styled.div`
 const Year = styled.span`
   font-size: 4rem;
   color: ${({ color }) => color};
+  opacity: ${({ scale }) => (scale === 1 ? scale : scale * 0.6)};
 `;
 
 const TimelineCircleContainer = styled.div`
   margin-top: 4.5rem;
-  transform: ${({ scale }) => `scale(${scale})`};
-  opacity: ${({ scale }) => (scale === 1 ? scale : scale * 0.6)};
-  transition: all 1s ease;
+  transform: ${({ scale }) => `scale(${scale === 1 ? scale : scale * 0.9})`};
+  opacity: ${({ scale }) => (scale === 1 ? scale : scale * 0.3)};
+  transition: all 0.5s ease;
 `;
 
 const TimelinePath = ({ timelineMoving, currentIndex, items }) => {

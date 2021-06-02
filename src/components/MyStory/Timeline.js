@@ -18,6 +18,7 @@ const Container = styled.div`
   opacity: 0;
   animation: 0.6s ${fadeInAndSlideUp} 0.6s ease forwards;
   min-height: 400px;
+  max-height: 700px;
 
   @media screen and (max-width: ${small}) {
     min-height: 550px;
