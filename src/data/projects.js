@@ -42,8 +42,7 @@ export default [
     downloadLinks: [
       {
         store: 'apple',
-        url:
-          'https://apps.apple.com/gb/app/airtime-rewards-earn-rewards/id975840117',
+        url: 'https://apps.apple.com/gb/app/airtime-rewards-earn-rewards/id975840117',
       },
       {
         store: 'google',
@@ -81,8 +80,7 @@ export default [
       },
       {
         store: 'google',
-        url:
-          'https://play.google.com/store/apps/details?id=uk.co.o2.android.myo2',
+        url: 'https://play.google.com/store/apps/details?id=uk.co.o2.android.myo2',
       },
     ],
     image: myO2,
@@ -108,8 +106,7 @@ export default [
       },
       {
         store: 'google',
-        url:
-          'https://play.google.com/store/apps/details?id=uk.co.ee.myee&hl=en_GB',
+        url: 'https://play.google.com/store/apps/details?id=uk.co.ee.myee&hl=en_GB',
       },
     ],
     image: eeUp,
@@ -139,8 +136,7 @@ export default [
       },
       {
         store: 'google',
-        url:
-          'https://play.google.com/store/apps/details?id=com.airtimerewards.suncashback.android',
+        url: 'https://play.google.com/store/apps/details?id=com.airtimerewards.suncashback.android',
       },
     ],
     image: sunCashback,

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
 import { formatDuration } from '../../utilities';
 import { xsmall } from '../../styles/breakpoints';
+import { medium } from '../../styles/fonts';
 
 const Text = styled.span`
   font-size: 2rem;
+  font-weight: ${medium};
 
   @media screen and (max-width: ${xsmall}) {
     font-size: 2.6rem;
@@ -12,7 +14,7 @@ const Text = styled.span`
 `;
 
 const Letter = styled(Text)`
-  width: 1rem;
+  width: 1.1rem;
   display: flex;
   justify-content: center;
 
@@ -34,7 +36,11 @@ const Container = styled.div`
 `;
 
 const formatDurationItem = (item) =>
-  [...item].map((letter, i) => <Letter key={i.toString()}>{letter}</Letter>);
+  [...item].map((letter, i) => {
+    const key = i.toString();
+
+    return <Letter key={key}>{letter}</Letter>;
+  });
 
 const Countdown = ({ date }) => {
   const [duration, setDuration] = useState(formatDuration(date));

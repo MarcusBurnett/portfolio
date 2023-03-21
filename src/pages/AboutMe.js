@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-// import Details from '../components/MyStory/Details';
-import Timeline from '../components/MyStory/Timeline';
-// import Spacer from '../components/Spacer';
+import Details from '../components/MyStory/Details';
 import { small } from '../styles/breakpoints';
 
 const Container = styled.div`
@@ -11,7 +9,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 3vw;
+  padding: 0 3vh 3vw;
   overflow: hidden;
 
   @media screen and (max-width: ${small}) {
@@ -20,12 +18,10 @@ const Container = styled.div`
   }
 `;
 
-const MyStory = () => (
+const AboutMe = () => (
   <Container>
-    {/* <Details />
-    <Spacer size="xxxl" /> */}
-    <Timeline />
+    <Details />
   </Container>
 );
 
-export default MyStory;
+export default AboutMe;

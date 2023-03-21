@@ -14,6 +14,7 @@ import { small, xsmall } from '../../styles/breakpoints';
 import { useWindowDimensions, useTabs } from '../../hooks';
 import { fadeInAndSlideRight } from '../../keyframes';
 import useThemeSelect from '../../hooks/useThemeSelect';
+import { regular, semiBold } from '../../styles/fonts';
 
 const StyledTabs = styled.ul`
   opacity: 0;
@@ -35,6 +36,10 @@ const Tab = styled.li`
   @media screen and (max-width: ${small}) {
     width: 100%;
     transform: translateX(0);
+  }
+
+  :last-child {
+    margin-bottom: 0;
   }
 `;
 
@@ -87,6 +92,7 @@ const StyledLink = styled(Link)`
   align-items: center;
   justify-content: center;
   opacity: ${({ selected }) => (selected ? 1 : 0.5)};
+  font-weight: ${({ selected }) => (selected ? semiBold : regular)};
   transition: opacity 0.4s ease;
   pointer-events: ${({ selected }) => (selected ? 'none' : 'auto')};
 

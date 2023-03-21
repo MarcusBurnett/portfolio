@@ -41,7 +41,7 @@ const Link = styled.a`
 
 const icons = [
   { url: 'mailto:m.burnett8@outlook.com', icon: emailIcon, name: 'email' },
-  { url: 'tel: +447393862452', icon: phoneIcon, name: 'phone' },
+  { url: 'tel: +31619714087', icon: phoneIcon, name: 'phone' },
   {
     url: 'https://www.linkedin.com/in/marcus-burnett/',
     icon: linkedInIcon,

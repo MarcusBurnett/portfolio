@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components/macro';
-import { regular } from './fonts';
+import { semiBold, regular } from './fonts';
 
 const Typography = createGlobalStyle`
 html {
@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  font-family: "Dosis", sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-weight: ${regular};
   font-size: 1.7rem;
   color: #ffffff;
@@ -21,7 +21,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: ${regular};
+  font-weight: ${semiBold};
   color: #ffffff;
   margin: 0;
 }

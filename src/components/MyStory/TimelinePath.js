@@ -2,8 +2,9 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components/macro';
 import { red } from '../../styles/colors';
 import Spacer from '../Spacer';
-import { small, medium } from '../../styles/breakpoints';
+import { small } from '../../styles/breakpoints';
 import useDynamicColors from '../../hooks/useDynamicColors';
+import { regular } from '../../styles/fonts';
 
 const Line = styled.div`
   height: 4px;
@@ -22,7 +23,7 @@ const Line = styled.div`
     rgba(108, 108, 108, 0) 100%
   )`};
   border-radius: 50%;
-  width: 600px;
+  width: 581px;
   opacity: ${({ scale }) => (scale === 1 ? scale : scale * 0.6)};
   transform: ${({ scale }) => `scale(${scale})`};
   transition: all 1s ease;
@@ -59,7 +60,7 @@ const StyledTimelinePath = styled.div`
     ${({ currentIndex }) => `translateX(-${currentIndex * 671 + 2}px)`};
   position: absolute;
   bottom: -80px;
-  left: -225px;
+  left: -215px;
   transform-origin: bottom left;
   transition: all 1s ease;
 
@@ -102,19 +103,16 @@ const LineContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: calc(10vh + 1.3rem);
-
-  @media screen and (max-width: ${medium}) {
-    padding-top: calc(30px + 1.3rem);
-  }
+  padding-top: calc(40vh + 1.3rem);
 
   @media screen and (max-width: ${small}) {
-    padding-top: calc(120px + 1.3rem);
+    padding-top: calc(20vh + 1.3rem);
   }
 `;
 
 const Year = styled.span`
   font-size: 4rem;
+  font-weight: ${regular};
   color: ${({ color }) => color};
   opacity: ${({ scale }) => (scale === 1 ? scale : scale * 0.6)};
 `;
@@ -134,9 +132,10 @@ const TimelinePath = ({ timelineMoving, currentIndex, items }) => {
       <StyledTimelinePath currentIndex={currentIndex}>
         {items.map((item, index) => {
           const scale = 1 + (currentIndex - index) / items.length;
+          const key = index.toString();
 
           return (
-            <Fragment key={index.toString()}>
+            <Fragment key={key}>
               <Line
                 color={text}
                 isActive={currentIndex >= index}

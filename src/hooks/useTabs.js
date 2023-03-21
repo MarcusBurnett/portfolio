@@ -22,6 +22,12 @@ const useTabs = () => {
         selected: pathname?.includes('my-story'),
       },
       {
+        title: 'About me',
+        icon: profileIcon,
+        path: '/about-me',
+        selected: pathname?.includes('about-me'),
+      },
+      {
         title: 'Skills',
         icon: skillsIcon,
         path: '/skills',

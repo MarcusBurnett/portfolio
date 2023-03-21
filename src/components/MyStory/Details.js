@@ -10,16 +10,18 @@ import useThemeSelect from '../../hooks/useThemeSelect';
 import Hobbies from './Hobbies';
 import useDynamicColors from '../../hooks/useDynamicColors';
 import { greyDark, greyMedium, red } from '../../styles/colors';
-import { medium as mediumFont } from '../../styles/fonts';
+import { medium as mediumFont, regular } from '../../styles/fonts';
 
 const StyledDetails = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: space-between;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   opacity: 0;
   animation: 0.6s ${fadeInAndSlideUp} 0.3s ease forwards;
+  flex: 1;
 
   @media screen and (max-width: ${large}) and (min-width: ${small}) {
     flex-direction: column;
@@ -36,7 +38,7 @@ const DetailsItem = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  align-items: flex-end;
+  /* align-items: flex-end; */
 
   @media screen and (max-width: ${xsmall}) {
     margin: 0.5rem 0;
@@ -45,9 +47,15 @@ const DetailsItem = styled.div`
 
 const DetailsList = styled.div`
   flex: 1;
+  min-height: 50vh;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
   @media screen and (max-width: ${medium}) {
     margin-bottom: 20px;
+    margin-top: 50px;
   }
 
   @media screen and (max-width: ${xsmall}) {
@@ -59,6 +67,7 @@ const DetailsList = styled.div`
 
 const Text = styled.span`
   font-size: 2rem;
+  font-weight: ${mediumFont};
 
   @media screen and (max-width: ${xsmall}) {
     font-size: 2.6rem;
@@ -66,7 +75,8 @@ const Text = styled.span`
 `;
 
 const Label = styled.span`
-  font-size: 1.4rem;
+  font-size: 1.8rem;
+  font-weight: ${regular};
 
   @media screen and (max-width: ${xsmall}) {
     font-size: 1.8rem;
@@ -76,9 +86,9 @@ const Label = styled.span`
 const ProfilePictureContainer = styled.div`
   position: absolute;
   top: -3vh;
-  left: -3vw;
-  width: 200px;
-  height: 200px;
+  right: -3vw;
+  width: 100%;
+  /* height: 100%; */
 
   .image {
     width: 100%;
@@ -87,14 +97,15 @@ const ProfilePictureContainer = styled.div`
 
   @media screen and (max-width: ${small}) {
     top: -90px;
-    left: -20px;
-    width: 220px;
-    height: 220px;
+    /* left: -20px; */
+    /* width: 220px;
+    height: 220px; */
   }
 `;
 
 const Image = styled.img`
   width: 100%;
+  object-fit: contain;
 `;
 
 const ImageFade = styled.div`
@@ -126,9 +137,9 @@ const VerticalImageFadeLight = styled(ImageFade)`
 
 const HorizontalImageFadeDark = styled(ImageFade)`
   background: linear-gradient(
-    -90deg,
+    90deg,
     rgba(26, 27, 41, 1) 0%,
-    rgba(26, 27, 41, 0.3) 50%
+    rgba(26, 27, 41, 0.3) 100%
   );
   opacity: ${({ opacity }) => opacity};
 `;
@@ -143,8 +154,10 @@ const VerticalImageFadeDark = styled(ImageFade)`
 `;
 
 const detailsListItems = [
-  { label: 'Nationality', value: <Text>British</Text> },
   { label: 'Age', value: <Countdown date={new Date(1995, 9, 20)} /> },
+  { label: 'Nationality', value: <Text>British</Text> },
+  { label: 'Lives in', value: <Text>Lent, Netherlands</Text> },
+  { label: 'Languages', value: <Text>English (Native), Dutch (Basic)</Text> },
   { label: 'Hobbies', value: <Hobbies /> },
 ];
 
@@ -152,12 +165,20 @@ const Background = styled.div`
   opacity: ${({ themeChanging }) => (themeChanging ? 0 : 1)};
   transition: ${({ themeChanging }) =>
     themeChanging ? '' : 'opacity 0.4s ease'};
+  height: 70vh;
+  width: 70vh;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 const QuoteContainer = styled.div`
   position: relative;
-  margin: 70px 40px 0px 120px;
-  max-width: 400px;
+  /* flex: 1; */
+  margin-top: 80px;
+  margin-bottom: 30px;
+  margin-left: 50px;
+  max-width: 800px;
 
   @media screen and (max-width: ${large}) and (min-width: ${small}) {
     order: 2;
@@ -165,7 +186,7 @@ const QuoteContainer = styled.div`
   }
 
   @media screen and (max-width: ${medium}) {
-    margin-top: 20px;
+    margin-top: 100px;
   }
 
   @media screen and (max-width: ${xsmall}) {
@@ -175,8 +196,9 @@ const QuoteContainer = styled.div`
 `;
 
 const Quote = styled.p`
-  line-height: 2.8rem;
+  line-height: 3.5rem;
   color: ${({ color }) => color};
+  font-size: 2rem;
 
   @media screen and (max-width: ${xsmall}) {
     font-size: 2rem;
@@ -189,6 +211,7 @@ const QuotedBy = styled.a`
   color: ${({ color }) => color};
   text-decoration: none;
   transition: color 0.2s ease;
+  font-size: 1.6rem;
 
   &:hover {
     color: ${red};
@@ -222,13 +245,24 @@ const Details = () => {
           <VerticalImageFadeDark opacity={opacity.dark} />
         </ProfilePictureContainer>
       </Background>
+      <DetailsList>
+        {detailsListItems?.map((item, i) => (
+          <Fragment key={item.label}>
+            <DetailsItem>
+              <Label>{item.label}</Label>
+              {item.value}
+            </DetailsItem>
+            {i < detailsListItems.length - 1 && <Spacer size="l" />}
+          </Fragment>
+        ))}
+      </DetailsList>
       <QuoteContainer>
         <Quote color={text}>
           &quot;Marcus has a range of skills in both design and development
           which give him the distinct ability to take an initial concept and
           turn it into a finished product.&quot;
         </Quote>
-        <Spacer />
+        <Spacer size="s" />
         <QuotedByContainer>
           <QuotedBy
             target="_blank"
@@ -240,17 +274,6 @@ const Details = () => {
           <ExternalLinkIcon src={externalLinkIcon} alt="external link" />
         </QuotedByContainer>
       </QuoteContainer>
-      <DetailsList>
-        {detailsListItems?.map((item, i) => (
-          <Fragment key={item.label}>
-            <DetailsItem>
-              <Label>{item.label}</Label>
-              {item.value}
-            </DetailsItem>
-            {i < detailsListItems.length - 1 && <Spacer />}
-          </Fragment>
-        ))}
-      </DetailsList>
     </StyledDetails>
   );
 };

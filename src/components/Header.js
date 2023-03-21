@@ -7,6 +7,8 @@ import Background from './Background';
 import { small, medium, xsmall } from '../styles/breakpoints';
 import { fadeInAndSlideUp } from '../keyframes';
 import { useDynamicColors } from '../hooks';
+import { regular as regularFont } from '../styles/fonts';
+import DarkModeToggle from './DarkModeToggle';
 
 const StyledHeader = styled.div`
   background-color: ${({ backgroundColor }) => backgroundColor};
@@ -68,10 +70,10 @@ const Content = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 5rem;
+  font-size: 4.5rem;
 
   @media screen and (max-width: ${medium}) and (min-width: ${small}) {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
 
   @media screen and (max-height: ${xsmall}) {
@@ -81,6 +83,7 @@ const Title = styled.h1`
 
 const SubTitle = styled.h2`
   font-size: 2.5rem;
+  font-weight: ${regularFont};
 
   @media screen and (max-width: ${medium}) and (max-width: ${small}) {
     font-size: 2rem;
@@ -89,6 +92,12 @@ const SubTitle = styled.h2`
   @media screen and (max-height: ${xsmall}) {
     font-size: 1.8rem;
   }
+`;
+
+const ToggleContainer = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 20px;
 `;
 
 const Header = () => {
@@ -109,6 +118,9 @@ const Header = () => {
         </Content>
         <Icons />
       </Container>
+      <ToggleContainer>
+        <DarkModeToggle />
+      </ToggleContainer>
     </StyledHeader>
   );
 };

@@ -80,7 +80,7 @@ const Content = styled.div`
   position: relative;
   width: 75%;
   margin-left: 20px;
-  margin-top: 10vh;
+  margin-top: 40vh;
   transition: all 0.5s ease;
   transform: ${({ isHidden }) => (isHidden ? 'scale(0)' : 'scale(1)')};
   opacity: ${({ isHidden }) => (isHidden ? 0 : 1)};
@@ -89,11 +89,10 @@ const Content = styled.div`
 
   @media screen and (max-width: ${medium}) {
     width: unset;
-    margin-top: 30px;
   }
 
   @media screen and (max-width: ${small}) {
-    margin-top: 120px;
+    margin-top: 20vh;
   }
 `;
 

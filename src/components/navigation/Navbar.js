@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import styled from 'styled-components/macro';
-import DarkModeToggle from '../DarkModeToggle';
+
 import Spacer from '../Spacer';
 import { small, xsmall } from '../../styles/breakpoints';
 import NavbarMobile from './NavbarMobile';
@@ -56,8 +56,6 @@ const Navbar = () => {
       <StyledSpacer size="s" />
       <StyledNavbar backgroundColor={header} menuOpen={menuOpen}>
         <Tabs setMenuOpen={setMenuOpen} />
-        <Spacer size="s" />
-        <DarkModeToggle />
       </StyledNavbar>
     </>
   );

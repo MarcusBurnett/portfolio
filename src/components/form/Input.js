@@ -67,16 +67,11 @@ const Error = styled.span`
 `;
 
 const Input = ({ name, label, onChange, value, error }) => {
-  const {
-    text,
-    inputBorder,
-    inputBorderFocus,
-    page,
-    inputLabel,
-  } = useDynamicColors(
-    { inputBorderFocus: darkBlue, inputLabel: blue },
-    { inputBorderFocus: lightBlue, inputLabel: '#FFFFFF' }
-  );
+  const { text, inputBorder, inputBorderFocus, page, inputLabel } =
+    useDynamicColors(
+      { inputBorderFocus: darkBlue, inputLabel: blue },
+      { inputBorderFocus: lightBlue, inputLabel: '#FFFFFF' }
+    );
 
   return (
     <StyledInput>

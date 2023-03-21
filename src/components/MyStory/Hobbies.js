@@ -14,10 +14,10 @@ const Item = styled.li`
   justify-content: center;
 
   .tooltip {
-    top: 6.2rem;
+    top: 8rem;
     opacity: 0;
     transition: opacity 0.3s ease;
-    margin-left: 15px;
+    margin-right: 25px;
 
     @media screen and (max-width: ${xsmall}) {
       top: 8rem;
@@ -31,9 +31,9 @@ const Item = styled.li`
 `;
 
 const Image = styled.img`
-  width: 2.6rem;
-  height: 2.6rem;
-  margin-left: 15px;
+  width: 3.4rem;
+  height: 3.4rem;
+  margin-right: 25px;
   margin-top: 10px;
 
   @media screen and (max-width: ${xsmall}) {
